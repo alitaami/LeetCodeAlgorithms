@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System.Collections.Generic;
+using System.Numerics;
+using System.Text;
 
 public class Solution
 {
@@ -14,8 +16,50 @@ public class Solution
         var res8 = MaxArea(new int[] { 1, 8, 6, 2, 5, 4, 8, 3, 7 });
         var res9 = RemoveDuplicates2(new int[] { 1, 1, 2 });
         var res10 = RemoveElement(new int[] { 3, 2, 2, 3 }, 3);
+        var res11 = SearchInsert(new int[] { 1, 3, 5 }, 3);
 
-        Console.WriteLine(res8); 
+        Console.WriteLine(res10);
+    }
+    public static int SearchInsert(int[] nums, int target)
+    {
+        Array.Sort(nums);
+        int result = 0;
+        int length = nums.Length;
+        int left = 0;
+        int right = 0;
+
+        if (nums.Any(n => n.Equals(target)))
+        {
+            result = nums.ToList().IndexOf(target);
+        }
+        else
+        { 
+            for (int i = 0; i < length; i++)
+            {
+                if (target < nums[i])
+                {
+                    return i;
+                }
+                else if (i + 1 >= length)
+                {
+                    return length;
+                }
+                else
+                {
+                    left = i;
+                    right = i + 1;
+
+                    if (nums[left] < target && target < nums[right])
+                    {
+                        return i + 1;
+                    }
+
+                    continue;
+                }
+            }
+        }
+
+        return result;
     }
     public static int RemoveDuplicates(int[] nums)
     {
@@ -44,7 +88,6 @@ public class Solution
     public static int LengthOfLastWord(string s)
     {
         return s.Trim().Split(' ').Last().Length;
-
     }
 
     public static bool CanJump(int[] nums)
@@ -209,8 +252,9 @@ public class Solution
         {
             if (!nums[i].Equals(val))
                 nums[j] = nums[i];
-                j++; 
+            j++;
         }
         return j;
     }
+
 }
