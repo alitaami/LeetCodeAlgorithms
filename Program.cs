@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 
@@ -17,8 +18,9 @@ public class Solution
         var res9 = RemoveDuplicates2(new int[] { 1, 1, 2 });
         var res10 = RemoveElement(new int[] { 3, 2, 2, 3 }, 3);
         var res11 = SearchInsert(new int[] { 1, 3, 5 }, 3);
+        var res12 = RansomeNote2("a", "b");
 
-        Console.WriteLine(res10);
+        Console.WriteLine(res12);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -33,7 +35,7 @@ public class Solution
             result = nums.ToList().IndexOf(target);
         }
         else
-        { 
+        {
             for (int i = 0; i < length; i++)
             {
                 if (target < nums[i])
@@ -257,4 +259,38 @@ public class Solution
         return j;
     }
 
+    public static bool RansomeNote(string ransomNote, string magazine)
+    {
+        var dic = new Dictionary<char, int>();
+
+        foreach (char c in magazine)
+        {
+            if (dic.ContainsKey(c))
+                dic[c]++;
+            else
+                dic[c] = 1;
+        }
+
+        foreach (char c in ransomNote)
+        {
+            if (!dic.TryGetValue(c, out int value) || value is 0)
+            {
+                return false;
+            }
+
+            dic[c]--;
+        }
+
+        return true;
+    }
+    public static bool RansomeNote2(string ransomNote, string magazine)
+    {
+        foreach (char c in ransomNote.Distinct())
+        {
+            if (magazine.Count(m => m == c) < ransomNote.Count(r => r == c))
+                return false;
+        }
+
+        return true;
+    }
 }
