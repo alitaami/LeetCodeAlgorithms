@@ -20,8 +20,9 @@ public class Solution
         var res11 = SearchInsert(new int[] { 1, 3, 5 }, 3);
         var res12 = RansomeNote2("a", "b");
         var res13 = IsValid("(){}[]");
+        var res14 = ReverseInteger(123);
 
-        Console.WriteLine(res13);
+        Console.WriteLine(res14);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -284,6 +285,7 @@ public class Solution
 
         return true;
     }
+
     public static bool RansomeNote2(string ransomNote, string magazine)
     {
         foreach (char c in ransomNote.Distinct())
@@ -334,5 +336,22 @@ public class Solution
         }
 
         return stack.Count() == 0;
+    }
+
+    public static int ReverseInteger(int x)
+    {
+        bool isNeagtive = x < 0;
+
+        var num = isNeagtive ? x.ToString().TrimStart('-') : x.ToString();
+
+        var array = num.ToCharArray();
+
+        Array.Reverse(array);
+
+        string res = string.Join("", array);
+
+        int.TryParse(res, out int result);
+
+        return isNeagtive ? (-1) * result : result;
     }
 }
