@@ -24,8 +24,10 @@ public class Solution
         var res15 = FirstMissingPositive(new int[] { 1, 2, 0 });
         var res16 = MySqrt(8);
         var res17 = MySqrt2(8);
+        var res18 = SingleNumber(new int[] { 4, 1, 2, 1, 2 });
+        var res19 = SingleNumber2(new int[] { 4, 1, 2, 1, 2 });
 
-        Console.WriteLine(res17);
+        Console.WriteLine(res18);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -375,8 +377,8 @@ public class Solution
         return (int)Math.Sqrt(x);
     }
     public static int MySqrt2(int x)
-    { 
-        if (x == 1 || x==  2)
+    {
+        if (x == 1 || x == 2)
             return 1;
 
         for (long i = 0; i < x; i++)
@@ -388,9 +390,43 @@ public class Solution
             else if (i * i == x)
             {
                 return (int)i;
-            } 
+            }
         }
 
         return 0;
+    }
+    public static int SingleNumber(int[] nums)
+    {
+        int res = 0;
+        var dic = new Dictionary<int, int>();
+
+        foreach (var num in nums)
+        {
+            if (!dic.ContainsKey(num))
+            {
+                dic[num] = 1;
+            }
+            else
+            {
+                dic[num]++;
+            }
+        }
+
+        foreach (var kvp in dic)
+        {
+            if (kvp.Value == 1)
+                res = kvp.Key;
+        }
+
+        return res;
+    }
+    public static int SingleNumber2(int[] nums)
+    {
+        var result = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            result ^= nums[i];
+        }
+        return result;
     }
 }
