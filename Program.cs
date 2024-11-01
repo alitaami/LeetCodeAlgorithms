@@ -22,8 +22,10 @@ public class Solution
         var res13 = IsValid("(){}[]");
         var res14 = ReverseInteger(123);
         var res15 = FirstMissingPositive(new int[] { 1, 2, 0 });
+        var res16 = MySqrt(8);
+        var res17 = MySqrt2(8);
 
-        Console.WriteLine(res15);
+        Console.WriteLine(res17);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -357,15 +359,38 @@ public class Solution
     }
 
     public static int FirstMissingPositive(int[] nums)
-    { 
+    {
         var numbers = new HashSet<int>(nums);
         int output = 1;
-         
+
         while (numbers.Contains(output))
         {
             output++;
         }
 
         return output;
+    }
+    public static int MySqrt(int x)
+    {
+        return (int)Math.Sqrt(x);
+    }
+    public static int MySqrt2(int x)
+    { 
+        if (x == 1 || x==  2)
+            return 1;
+
+        for (long i = 0; i < x; i++)
+        {
+            if (i * i > x)
+            {
+                return (int)i - 1;
+            }
+            else if (i * i == x)
+            {
+                return (int)i;
+            } 
+        }
+
+        return 0;
     }
 }
