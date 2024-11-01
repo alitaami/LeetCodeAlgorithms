@@ -21,8 +21,9 @@ public class Solution
         var res12 = RansomeNote2("a", "b");
         var res13 = IsValid("(){}[]");
         var res14 = ReverseInteger(123);
+        var res15 = FirstMissingPositive(new int[] { 1, 2, 0 });
 
-        Console.WriteLine(res14);
+        Console.WriteLine(res15);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -353,5 +354,18 @@ public class Solution
         int.TryParse(res, out int result);
 
         return isNeagtive ? (-1) * result : result;
+    }
+
+    public static int FirstMissingPositive(int[] nums)
+    { 
+        var numbers = new HashSet<int>(nums);
+        int output = 1;
+         
+        while (numbers.Contains(output))
+        {
+            output++;
+        }
+
+        return output;
     }
 }
