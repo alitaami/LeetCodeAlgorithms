@@ -19,8 +19,9 @@ public class Solution
         var res10 = RemoveElement(new int[] { 3, 2, 2, 3 }, 3);
         var res11 = SearchInsert(new int[] { 1, 3, 5 }, 3);
         var res12 = RansomeNote2("a", "b");
+        var res13 = IsValid("(){}[]");
 
-        Console.WriteLine(res12);
+        Console.WriteLine(res13);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -292,5 +293,46 @@ public class Solution
         }
 
         return true;
+    }
+
+    public static bool IsValid(string s)
+    {
+        if (s.Length % 2 != 0)
+            return false;
+
+        Stack<char> stack = new Stack<char>();
+
+        foreach (char c in s)
+        {
+            if (c == '(' || c == '{' || c == '[')
+            {
+                stack.Push(c);
+            }
+            else if (!stack.Any())
+            {
+                return false;
+            }
+            else if (c == '}')
+            {
+                if (stack.Pop() != '{')
+                    return false;
+            }
+            else if (c == ']')
+            {
+                if (stack.Pop() != '[')
+                    return false;
+            }
+            else if (c == ')')
+            {
+                if (stack.Peek() != '(')
+                {
+                    return false;
+                }
+
+                stack.Pop();
+            }
+        }
+
+        return stack.Count() == 0;
     }
 }
