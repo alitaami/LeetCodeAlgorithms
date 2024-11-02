@@ -27,8 +27,9 @@ public class Solution
         var res18 = SingleNumber(new int[] { 4, 1, 2, 1, 2 });
         var res19 = SingleNumber2(new int[] { 4, 1, 2, 1, 2 });
         var res20 = MyAtoi("-42");
+        var res21 = Divide(10, 3);
 
-        Console.WriteLine(res20);
+        Console.WriteLine(res21);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -446,7 +447,7 @@ public class Solution
             sign = s[0] == '-' ? -1 : 1;
             s = s[1..];
         }
-         
+
         foreach (char c in s)
         {
             if (char.IsDigit(c))
@@ -479,5 +480,17 @@ public class Solution
         int.TryParse(s, out int result);
 
         return result * sign;
+    }
+
+    public static int Divide(int dividend, int divisor)
+    {
+        long division = (long)dividend / divisor;
+
+        if (division >= int.MaxValue)
+            return int.MaxValue;
+        else if (division <= int.MinValue)
+            return int.MinValue;
+
+        return (int)division;
     }
 }
