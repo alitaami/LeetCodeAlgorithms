@@ -26,8 +26,9 @@ public class Solution
         var res17 = MySqrt2(8);
         var res18 = SingleNumber(new int[] { 4, 1, 2, 1, 2 });
         var res19 = SingleNumber2(new int[] { 4, 1, 2, 1, 2 });
+        var res20 = MyAtoi("-42");
 
-        Console.WriteLine(res18);
+        Console.WriteLine(res20);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -428,5 +429,55 @@ public class Solution
             result ^= nums[i];
         }
         return result;
+    }
+
+    public static int MyAtoi(string s)
+    {
+        s = s.Trim();
+
+        if (string.IsNullOrEmpty(s))
+            return 0;
+
+        StringBuilder sb = new StringBuilder();
+
+        int sign = 1;
+        if (s[0] == '-' || s[0] == '+')
+        {
+            sign = s[0] == '-' ? -1 : 1;
+            s = s[1..];
+        }
+         
+        foreach (char c in s)
+        {
+            if (char.IsDigit(c))
+            {
+                sb.Append(c.ToString());
+            }
+
+            else
+                break;
+        }
+
+        s = sb.ToString();
+
+        if (BigInteger.TryParse(s, out BigInteger bigInt))
+        {
+            bigInt = bigInt * (sign);
+
+            if (bigInt >= int.MaxValue)
+            {
+                sign = 1;
+                return int.MaxValue;
+            }
+            else if (bigInt <= int.MinValue)
+            {
+                sign = -1;
+                return int.MinValue;
+            }
+        }
+
+        int.TryParse(s, out int result);
+
+        return result * sign;
     }
 }
