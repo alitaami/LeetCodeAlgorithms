@@ -29,6 +29,9 @@ public class Solution
         var res20 = MyAtoi("-42");
         var res21 = Divide(10, 3);
 
+        // SQL
+        var sqlProblem = CombineTwoTable();
+
         Console.WriteLine(res21);
     }
     public static int SearchInsert(int[] nums, int target)
@@ -493,4 +496,22 @@ public class Solution
 
         return (int)division;
     }
+
+    #region SQL
+    public static string CombineTwoTable()
+    {
+        string query = @"
+                       Select 
+                       p.firstName ,
+                       p.lastName ,
+                       a.city ,
+                       a.state  
+                       from  Person p 
+                       left join 
+                       Address a 
+                       on p.personId = a.personId
+                       ";
+        return query;
+    }
+    #endregion
 }
