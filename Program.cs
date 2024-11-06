@@ -31,6 +31,7 @@ public class Solution
 
         // SQL
         var sqlProblem = CombineTwoTable();
+        var sqlProblem1 = DuplicateEmails();
 
         Console.WriteLine(res21);
     }
@@ -513,5 +514,14 @@ public class Solution
                        ";
         return query;
     }
+    public static string DuplicateEmails()
+    {
+        string query = @"SELECT distinct p.Email
+                         FROM Person p
+                         WHERE (SELECT COUNT(*) FROM Person pp WHERE p.Email = pp.Email) > 1;
+                         ";
+        return query;
+    }
+
     #endregion
 }
