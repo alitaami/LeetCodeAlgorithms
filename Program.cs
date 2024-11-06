@@ -34,6 +34,7 @@ public class Solution
         var sqlProblem1 = DuplicateEmails();
         var sqlProblem2 = BigCountries();
         var sqlProblem3 = SecondHighestSalary();
+        var sqlProblem4 = RankScores();
 
         Console.WriteLine(res21);
     }
@@ -542,6 +543,15 @@ public class Solution
                          FROM Employee e
                          WHERE e.salary < (SELECT MAX(ee.salary) FROM Employee ee);
                          ";
+        return query;
+    }
+    
+    public static string RankScores()
+    {
+        string query = @"Select 
+                         s.score,
+                         Dense_Rank() over (Order By s.score Desc) as Rank
+                         from Scores s";
         return query;
     }
     #endregion
