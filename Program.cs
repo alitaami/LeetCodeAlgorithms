@@ -33,6 +33,7 @@ public class Solution
         var sqlProblem = CombineTwoTable();
         var sqlProblem1 = DuplicateEmails();
         var sqlProblem2 = BigCountries();
+        var sqlProblem3 = SecondHighestSalary();
 
         Console.WriteLine(res21);
     }
@@ -531,6 +532,15 @@ public class Solution
                          w.area
                          from World w 
                          where w.area >= 3000000 or w.population >= 25000000 
+                         ";
+        return query;
+    }
+    
+    public static string SecondHighestSalary()
+    {
+        string query = @"SELECT MAX(e.salary) AS SecondHighestSalary
+                         FROM Employee e
+                         WHERE e.salary < (SELECT MAX(ee.salary) FROM Employee ee);
                          ";
         return query;
     }
