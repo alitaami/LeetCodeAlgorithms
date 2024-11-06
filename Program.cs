@@ -32,6 +32,7 @@ public class Solution
         // SQL
         var sqlProblem = CombineTwoTable();
         var sqlProblem1 = DuplicateEmails();
+        var sqlProblem2 = BigCountries();
 
         Console.WriteLine(res21);
     }
@@ -522,6 +523,16 @@ public class Solution
                          ";
         return query;
     }
-
+    public static string BigCountries()
+    {
+        string query = @"select 
+                         w.name,
+                         w.population,
+                         w.area
+                         from World w 
+                         where w.area >= 3000000 or w.population >= 25000000 
+                         ";
+        return query;
+    }
     #endregion
 }
