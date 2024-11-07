@@ -30,6 +30,7 @@ public class Solution
         var res21 = Divide(10, 3);
         var res22 = WordPattern("abab", "dog dog dog dog");
         var res23 = ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
+        var res24 = AddStrings("11", "123");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -538,7 +539,7 @@ public class Solution
         int left = 0;
         int right = s.Length - 1;
 
-        while (left <  right)
+        while (left < right)
         {
             char t = s[left];
             s[left] = s[right];
@@ -548,6 +549,14 @@ public class Solution
         }
 
         return "";
+    }
+
+    public static string AddStrings(string num1, string num2)
+    {
+        BigInteger.TryParse(num1, out BigInteger number1);
+        BigInteger.TryParse(num2, out BigInteger number2);
+
+        return (number1 + number2).ToString();
     }
 
     #region SQL
