@@ -31,6 +31,7 @@ public class Solution
         var res22 = WordPattern("abab", "dog dog dog dog");
         var res23 = ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
         var res24 = AddStrings("11", "123");
+        var res25 = ValidIPAddress("172.16.254.1");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -557,6 +558,64 @@ public class Solution
         BigInteger.TryParse(num2, out BigInteger number2);
 
         return (number1 + number2).ToString();
+    }
+
+    public static string ValidIPAddress(string queryIP)
+    {
+        string neither = "Neither";
+
+        if (string.IsNullOrEmpty(queryIP))
+            return neither;
+        
+        char splitChar = queryIP.Contains(':') ? ':' : '.';
+         
+        if (splitChar == '.')
+        {
+            var parts = queryIP.Split(splitChar);
+
+            if (parts.Length != 4)
+                return neither;
+
+            foreach (var part in parts)
+            {
+                if (part.Length == 0 || part.Length > 3)
+                    return neither;
+                 
+                if (part.Length > 1 && part.StartsWith('0'))
+                    return neither;
+
+                if (!int.TryParse(part, out int num) || num < 0 || num > 255)
+                    return neither;
+            }
+
+            return "IPv4";
+        }
+        else if (splitChar == ':')
+        {
+            var parts = queryIP.Split(splitChar);
+
+            if (parts.Length != 8)
+                return neither;
+
+            foreach (var part in parts)
+            {
+                if (part.Length == 0 || part.Length > 4)
+                    return neither;
+
+                // Check if each part is a valid hexadecimal number
+                foreach (char c in part)
+                {
+                    bool isHex = (char.IsDigit(c)) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
+
+                    if (!isHex)
+                        return neither;
+                }
+            }
+
+            return "IPv6";
+        }
+
+        return neither;
     }
 
     #region SQL
