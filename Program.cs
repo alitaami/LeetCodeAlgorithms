@@ -28,6 +28,7 @@ public class Solution
         var res19 = SingleNumber2(new int[] { 4, 1, 2, 1, 2 });
         var res20 = MyAtoi("-42");
         var res21 = Divide(10, 3);
+        var res22 = WordPattern("abab", "dog dog dog dog");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -36,7 +37,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res21);
+        Console.WriteLine(res22);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -501,6 +502,36 @@ public class Solution
         return (int)division;
     }
 
+    public static bool WordPattern(string pattern, string s)
+    {
+        var ss = s.Trim().Split(' ');
+
+        if (ss.Length != pattern.Length)
+            return false;
+
+        Dictionary<char, string> dict = new Dictionary<char, string>();
+         
+        for (int i = 0; i < pattern.Length; i++)
+        {
+            if (dict.TryGetValue(pattern[i], out string str))
+            {
+                if (str != ss[i])
+                    return false;
+
+                else
+                    continue;
+            }
+
+            if (dict.ContainsValue(ss[i]))
+                return false;
+
+            else 
+                dict[pattern[i]] = ss[i];
+        }
+
+        return true;
+    }
+
     #region SQL
     public static string CombineTwoTable()
     {
@@ -536,7 +567,7 @@ public class Solution
                          ";
         return query;
     }
-    
+
     public static string SecondHighestSalary()
     {
         string query = @"SELECT MAX(e.salary) AS SecondHighestSalary
@@ -545,7 +576,7 @@ public class Solution
                          ";
         return query;
     }
-    
+
     public static string RankScores()
     {
         string query = @"Select 
