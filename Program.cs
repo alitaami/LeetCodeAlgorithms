@@ -29,6 +29,7 @@ public class Solution
         var res20 = MyAtoi("-42");
         var res21 = Divide(10, 3);
         var res22 = WordPattern("abab", "dog dog dog dog");
+        var res23 = ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -510,7 +511,7 @@ public class Solution
             return false;
 
         Dictionary<char, string> dict = new Dictionary<char, string>();
-         
+
         for (int i = 0; i < pattern.Length; i++)
         {
             if (dict.TryGetValue(pattern[i], out string str))
@@ -525,11 +526,28 @@ public class Solution
             if (dict.ContainsValue(ss[i]))
                 return false;
 
-            else 
+            else
                 dict[pattern[i]] = ss[i];
         }
 
         return true;
+    }
+
+    public static string ReverseString(char[] s)
+    {
+        int left = 0;
+        int right = s.Length - 1;
+
+        while (left <  right)
+        {
+            char t = s[left];
+            s[left] = s[right];
+            s[right] = t;
+            left++;
+            right--;
+        }
+
+        return "";
     }
 
     #region SQL
