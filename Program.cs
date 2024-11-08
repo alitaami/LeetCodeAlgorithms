@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Xml;
 
 public class Solution
 {
@@ -49,6 +50,7 @@ public class Solution
         var sqlProblem5 = FindCustomerReferee();
         var sqlProblem6 = GroupSoldProductsByTheDate();
         var sqlProblem7 = TopTravellers();
+        var sqlProblem8 = ReplaceEmployeeIDWithTheUniqueIdentifier();
 
         Console.WriteLine(res10);
     }
@@ -874,6 +876,16 @@ public class Solution
                      ORDER BY 
                          travelled_distance DESC 
                      ";
+        return query;
+    }
+    
+    public static string ReplaceEmployeeIDWithTheUniqueIdentifier()
+    {
+        string query = @"SELECT en.unique_id, e.name
+                         FROM Employees AS e
+                         LEFT JOIN EmployeeUNI AS en
+                         ON e.id = en.id
+                                              ";
         return query;
     }
 
