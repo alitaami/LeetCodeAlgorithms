@@ -37,6 +37,7 @@ public class Solution
         var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
         var res29 = StrStr("sadbutsad", "sad");
         var res30 = IsPalindrome("AbBa");
+        var res31 = MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -45,7 +46,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res30);
+        Console.WriteLine(res31);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -703,6 +704,42 @@ public class Solution
         }
 
         return true;
+    }
+
+    public static int MaxProfit(int[] prices)
+    {
+        // Dumb Way 
+
+        //int maxProfit = 0;
+
+        //for (int i = 0; i < prices.Length; i++)
+        //{
+        //    for (int j = i + 1; j < prices.Length; j++)
+        //    {
+        //        if (prices[j] - prices[i] > maxProfit)
+        //            maxProfit = prices[j] - prices[i];
+        //    }
+        //}
+        //return maxProfit;
+
+       // -------------
+
+        int maxProfit = 0;
+        int minPrice = int.MaxValue;
+
+        foreach (int price in prices)
+        {
+            if (price < minPrice)
+            {
+                minPrice = price;
+            }
+            else
+            {
+                maxProfit = Math.Max(maxProfit, price - minPrice);
+            }
+        }
+
+        return maxProfit;
     }
 
     #region SQL
