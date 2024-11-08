@@ -46,8 +46,9 @@ public class Solution
         var sqlProblem2 = BigCountries();
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
+        var sqlProblem5 = FindCustomerReferee();
 
-        Console.WriteLine(res31);
+        Console.WriteLine(res10);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -280,8 +281,10 @@ public class Solution
         for (int i = 0; i < nums.Length; i++)
         {
             if (!nums[i].Equals(val))
+            {
                 nums[j] = nums[i];
-            j++;
+                j++;
+            }
         }
         return j;
     }
@@ -825,5 +828,16 @@ public class Solution
                          from Scores s";
         return query;
     }
+    
+    public static string FindCustomerReferee()
+    {
+        string query = @"
+                        Select c.name from 
+                        Customer c 
+                        where c.referee_id <> 2 or c.referee_id is null";
+        return query;
+    }
+
+
     #endregion
 }
