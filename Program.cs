@@ -34,6 +34,7 @@ public class Solution
         var res25 = ValidIPAddress("172.16.254.1");
         var res26 = LargestNumber(new int[] { 10, 2 });
         var res27 = ContainsDuplicate(new int[] { 1, 2, 3, 1 });
+        var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3 , new int[] { 2, 5, 6 }, 3);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -42,7 +43,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res27);
+        Console.WriteLine(res28);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -650,6 +651,17 @@ public class Solution
         }
 
         return false;
+    }
+
+    public static int[] Merge(int[] nums1, int m, int[] nums2, int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            nums1[m + i] = nums2[i];
+        }
+        Array.Sort(nums1);
+
+        return nums1;
     }
 
     #region SQL
