@@ -34,7 +34,8 @@ public class Solution
         var res25 = ValidIPAddress("172.16.254.1");
         var res26 = LargestNumber(new int[] { 10, 2 });
         var res27 = ContainsDuplicate(new int[] { 1, 2, 3, 1 });
-        var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3 , new int[] { 2, 5, 6 }, 3);
+        var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
+        var res29 = StrStr("sadbutsad", "sad");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -43,7 +44,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res28);
+        Console.WriteLine(res29);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -662,6 +663,19 @@ public class Solution
         Array.Sort(nums1);
 
         return nums1;
+    }
+
+    public static int StrStr(string haystack, string needle)
+    {
+        for (int i = 0; i <= haystack.Length - needle.Length; i++)
+        {
+            var subString = haystack.Substring(i, needle.Length);
+
+            if (subString == needle)
+                return i;
+        }
+
+        return -1;
     }
 
     #region SQL
