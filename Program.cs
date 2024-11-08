@@ -33,6 +33,7 @@ public class Solution
         var res24 = AddStrings("11", "123");
         var res25 = ValidIPAddress("172.16.254.1");
         var res26 = LargestNumber(new int[] { 10, 2 });
+        var res27 = ContainsDuplicate(new int[] { 1, 2, 3, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -41,7 +42,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res26);
+        Console.WriteLine(res27);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -630,6 +631,25 @@ public class Solution
         Array.Sort(strNums, (a, b) => (b + a).CompareTo(a + b));
 
         return string.Concat(strNums);
+    }
+
+    public static bool ContainsDuplicate(int[] nums)
+    {
+        var set = new HashSet<int>();
+
+        foreach (var n in nums)
+        {
+            if (set.Contains(n))
+            {
+                return true;
+            }
+            else
+            {
+                set.Add(n);
+            }
+        }
+
+        return false;
     }
 
     #region SQL
