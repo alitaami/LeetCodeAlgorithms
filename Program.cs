@@ -47,6 +47,8 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
         var sqlProblem5 = FindCustomerReferee();
+        var sqlProblem6 = GroupSoldProductsByTheDate();
+        var sqlProblem7 = TopTravellers();
 
         Console.WriteLine(res10);
     }
@@ -837,6 +839,7 @@ public class Solution
                         where c.referee_id <> 2 or c.referee_id is null";
         return query;
     }
+
     public static string GroupSoldProductsByTheDate()
     {
         string query = @" SELECT
@@ -848,6 +851,29 @@ public class Solution
                           GROUP BY 
                               a.sell_date
                        ";
+        return query;
+    }
+    
+    public static string TopTravellers()
+    {
+        string query = @"SELECT 
+                         u.name,
+                         SUM(Case 
+                         When r.distance Is Null
+                         Then 0
+                         Else
+                          r.distance 
+                         End ) AS travelled_distance 
+                     FROM
+                        Users u
+                      left join
+                          Rides r ON r.user_id = u.id
+                     GROUP BY 
+                         u.id,
+                         u.name 
+                     ORDER BY 
+                         travelled_distance DESC 
+                     ";
         return query;
     }
 
