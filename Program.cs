@@ -828,13 +828,26 @@ public class Solution
                          from Scores s";
         return query;
     }
-    
+
     public static string FindCustomerReferee()
     {
         string query = @"
                         Select c.name from 
                         Customer c 
                         where c.referee_id <> 2 or c.referee_id is null";
+        return query;
+    }
+    public static string GroupSoldProductsByTheDate()
+    {
+        string query = @" SELECT
+                              a.sell_date,
+                              COUNT(a.product) AS num_sold,
+                              STRING_AGG(a.product, ',') AS products
+                          FROM  
+  	                      (SELECT DISTINCT * FROM Activities ) a 
+                          GROUP BY 
+                              a.sell_date
+                       ";
         return query;
     }
 
