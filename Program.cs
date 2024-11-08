@@ -51,6 +51,7 @@ public class Solution
         var sqlProblem6 = GroupSoldProductsByTheDate();
         var sqlProblem7 = TopTravellers();
         var sqlProblem8 = ReplaceEmployeeIDWithTheUniqueIdentifier();
+        var sqlProblem9 = AverageSellingPrice();
 
         Console.WriteLine(res10);
     }
@@ -855,7 +856,7 @@ public class Solution
                        ";
         return query;
     }
-    
+
     public static string TopTravellers()
     {
         string query = @"SELECT 
@@ -878,7 +879,7 @@ public class Solution
                      ";
         return query;
     }
-    
+
     public static string ReplaceEmployeeIDWithTheUniqueIdentifier()
     {
         string query = @"SELECT en.unique_id, e.name
@@ -888,7 +889,20 @@ public class Solution
                                               ";
         return query;
     }
-
+    public static string AverageSellingPrice()
+    {
+        string query = @"Select 
+                         p.product_id ,
+C                        OALESCE(ROUND(CAST(SUM(p.price * us.units) AS FLOAT) / SUM(us.units),2),0) as average_price 
+                         from 
+                         Prices p 
+                         left join 
+                         UnitsSold us
+                         on p.product_id  = us.product_id  
+                         AND purchase_date >= start_date and purchase_date <= end_date
+                         Group By p.product_id ";
+        return query;
+    } 
 
     #endregion
 }
