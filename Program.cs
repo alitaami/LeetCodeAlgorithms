@@ -32,6 +32,7 @@ public class Solution
         var res23 = ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
         var res24 = AddStrings("11", "123");
         var res25 = ValidIPAddress("172.16.254.1");
+        var res26 = LargestNumber(new int[] { 10, 2 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -40,7 +41,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res22);
+        Console.WriteLine(res26);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -566,9 +567,9 @@ public class Solution
 
         if (string.IsNullOrEmpty(queryIP))
             return neither;
-        
+
         char splitChar = queryIP.Contains(':') ? ':' : '.';
-         
+
         if (splitChar == '.')
         {
             var parts = queryIP.Split(splitChar);
@@ -580,7 +581,7 @@ public class Solution
             {
                 if (part.Length == 0 || part.Length > 3)
                     return neither;
-                 
+
                 if (part.Length > 1 && part.StartsWith('0'))
                     return neither;
 
@@ -616,6 +617,19 @@ public class Solution
         }
 
         return neither;
+    }
+
+    public static string LargestNumber(int[] nums)
+    {
+        if (nums.All(n => n == 0))
+            return "0";
+
+        var strNums = nums.Select(n => n.ToString()).ToArray();
+
+        //If b + a (where b comes before a) is larger, then b should appear before a in the final arrangement.
+        Array.Sort(strNums, (a, b) => (b + a).CompareTo(a + b));
+
+        return string.Concat(strNums);
     }
 
     #region SQL
