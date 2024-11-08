@@ -36,6 +36,7 @@ public class Solution
         var res27 = ContainsDuplicate(new int[] { 1, 2, 3, 1 });
         var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
         var res29 = StrStr("sadbutsad", "sad");
+        var res30 = IsPalindrome("AbBa");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -44,7 +45,7 @@ public class Solution
         var sqlProblem3 = SecondHighestSalary();
         var sqlProblem4 = RankScores();
 
-        Console.WriteLine(res29);
+        Console.WriteLine(res30);
     }
     public static int SearchInsert(int[] nums, int target)
     {
@@ -676,6 +677,32 @@ public class Solution
         }
 
         return -1;
+    }
+
+    public static bool IsPalindrome(string s)
+    {
+        s = s.ToLower().Trim();
+        StringBuilder sb = new StringBuilder();
+
+        foreach (char c in s)
+        {
+            if (char.IsLetterOrDigit(c))
+                sb.Append(c);
+        }
+
+        string cleanedString = sb.ToString();
+        int left = 0, right = cleanedString.Length - 1;
+
+        while (left < right)
+        {
+            if (cleanedString[left] != cleanedString[right])
+                return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
     }
 
     #region SQL
