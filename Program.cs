@@ -38,6 +38,7 @@ public class Solution
         var res29 = StrStr("sadbutsad", "sad");
         var res30 = IsPalindrome("AbBa");
         var res31 = MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 });
+        var res32 = IsPalindrome(-121);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -722,7 +723,7 @@ public class Solution
         //}
         //return maxProfit;
 
-       // -------------
+        // -------------
 
         int maxProfit = 0;
         int minPrice = int.MaxValue;
@@ -740,6 +741,35 @@ public class Solution
         }
 
         return maxProfit;
+    }
+
+    public static bool IsPalindrome(int x)
+    {
+        // -- Slow way -- 
+        //var y = x.ToString().ToCharArray();
+        //Array.Reverse(y); //Reverses char array.
+        //return x.ToString() == new string(y);
+
+
+        // -- Fast way --
+
+        if (x < 0)
+            return false;
+
+        var number = x.ToString();
+
+        int left = 0, right = number.Length - 1;
+
+        while (left < right)
+        {
+            if (number[left] != number[right])
+                return false;
+
+            left++;
+            right--;
+        }
+
+        return true;
     }
 
     #region SQL
