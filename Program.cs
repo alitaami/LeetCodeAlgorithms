@@ -52,6 +52,7 @@ public class Solution
         var sqlProblem7 = TopTravellers();
         var sqlProblem8 = ReplaceEmployeeIDWithTheUniqueIdentifier();
         var sqlProblem9 = AverageSellingPrice();
+        var sqlProblem10 = PatientsWithACondition();
 
         Console.WriteLine(res10);
     }
@@ -902,7 +903,21 @@ C                        OALESCE(ROUND(CAST(SUM(p.price * us.units) AS FLOAT) / 
                          AND purchase_date >= start_date and purchase_date <= end_date
                          Group By p.product_id ";
         return query;
-    } 
+    }
+
+    public static string PatientsWithACondition
+()
+    {
+        string query = @"SELECT *
+                         FROM Patients 
+                         WHERE EXISTS (
+                             SELECT 1
+                             FROM STRING_SPLIT(conditions, ' ') AS splittedConditions
+                             WHERE splittedConditions.value LIKE N'DIAB1%'
+                         );
+                          ";
+        return query;
+    }
 
     #endregion
 }
