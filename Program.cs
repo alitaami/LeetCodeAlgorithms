@@ -40,6 +40,7 @@ public class Solution
         var res30 = IsPalindrome("AbBa");
         var res31 = MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 });
         var res32 = IsPalindrome(-121);
+        var res33 = LongestCommonPrefix(new string[] { "flower", "flow", "flight" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -781,6 +782,30 @@ public class Solution
         return true;
     }
 
+    public static string LongestCommonPrefix(string[] strs)
+    {
+        HashSet<string> words = new HashSet<string>(strs);
+        int min = strs.Min(c => c.Length);
+
+        string shortestWord = strs.FirstOrDefault(c => c.Length == min);
+        string prefix = string.Empty;
+        string startsWithString = string.Empty;
+
+        for (int i = 0; i < shortestWord.Length; i++)
+        {
+            startsWithString = prefix + shortestWord[i];
+
+            if (!words.All(c => c.StartsWith(startsWithString)))
+                break;
+            else
+                prefix += shortestWord[i];
+            continue;
+        }
+
+        return prefix;
+    } 
+     
+
     #region SQL
     public static string CombineTwoTable()
     {
@@ -894,7 +919,7 @@ public class Solution
     {
         string query = @"Select 
                          p.product_id ,
-C                        OALESCE(ROUND(CAST(SUM(p.price * us.units) AS FLOAT) / SUM(us.units),2),0) as average_price 
+                         COALESCE(ROUND(CAST(SUM(p.price * us.units) AS FLOAT) / SUM(us.units),2),0) as average_price 
                          from 
                          Prices p 
                          left join 
