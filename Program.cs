@@ -55,48 +55,39 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res10);
+        Console.WriteLine(res11);
     }
     public static int SearchInsert(int[] nums, int target)
     {
         Array.Sort(nums);
-        int result = 0;
+        int? left = 0;
+        int? right = 0;
         int length = nums.Length;
-        int left = 0;
-        int right = 0;
 
-        if (nums.Any(n => n.Equals(target)))
+        for (int i = 0; i < length; i++)
         {
-            result = nums.ToList().IndexOf(target);
-        }
-        else
-        {
-            for (int i = 0; i < length; i++)
+            left = nums[i];
+            right = i + 1 == length ? null : nums[i + 1];
+
+            if (right != null)
             {
-                if (target < nums[i])
-                {
+                if (left == target)
                     return i;
-                }
-                else if (i + 1 >= length)
+                else if (right == target)
+                    return i + 1;
+                else if (left < target && target < right)
                 {
-                    return length;
-                }
-                else
-                {
-                    left = i;
-                    right = i + 1;
-
-                    if (nums[left] < target && target < nums[right])
-                    {
-                        return i + 1;
-                    }
-
-                    continue;
+                    return i + 1;
                 }
             }
+            else
+            {
+                if (target > left)
+                    return i + 1;
+            }
         }
+        return 0;
 
-        return result;
     }
     public static int RemoveDuplicates(int[] nums)
     {
@@ -803,8 +794,8 @@ public class Solution
         }
 
         return prefix;
-    } 
-     
+    }
+
 
     #region SQL
     public static string CombineTwoTable()
@@ -945,4 +936,5 @@ public class Solution
     }
 
     #endregion
+
 }
