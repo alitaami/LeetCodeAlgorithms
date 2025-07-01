@@ -41,6 +41,8 @@ public class Solution
         var res31 = MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 });
         var res32 = IsPalindrome(-121);
         var res33 = LongestCommonPrefix(new string[] { "flower", "flow", "flight" });
+        var res34 = PlusOne(new int[] { 1, 2, 3 });
+        var res35 = PlusOne2(new int[] { 1, 2, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -796,6 +798,57 @@ public class Solution
         return prefix;
     }
 
+    public static int[] PlusOne(int[] digits)
+    {
+        BigInteger number = 0;
+        var stringNumber = string.Concat(digits);
+        BigInteger.TryParse(stringNumber, out number);
+
+        number += 1;
+
+        return number.ToString()
+            .Select(c => int.Parse(c.ToString()))
+            .ToArray();
+    }
+
+    public static int[] PlusOne2(int[] digits)
+    {
+        if (digits.Last() is 9)
+        {
+            int carry = 1;
+
+            for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                digits[i] += carry;
+
+                if (digits[i] is 10)
+                {
+                    digits[i] = 0;
+                    carry = 1;
+                }
+                else
+                {
+                    carry = 0;
+                    break;
+                }
+            }
+
+            if (carry is 1)
+            {
+                int[] newDigits = new int[digits.Length + 1];
+                newDigits[0] = 1;
+
+                Array.Copy(digits, 0, newDigits, 1, digits.Length);
+
+                return newDigits;
+            }
+        }
+        else
+            digits[digits.Length - 1]++;
+
+        return digits;
+
+    }
 
     #region SQL
     public static string CombineTwoTable()
