@@ -453,6 +453,14 @@ public class Solution
         return result;
     }
 
+    public static int SingleNumber3(int[] nums)
+    {
+        return nums.GroupBy(n => n)
+                   .Where(g => g.Count() == 1)
+                   .Select(g => g.Key)
+                   .FirstOrDefault();
+    }
+
     public static int MyAtoi(string s)
     {
         s = s.Trim();
