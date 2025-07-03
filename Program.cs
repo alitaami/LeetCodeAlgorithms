@@ -47,8 +47,9 @@ public class Solution
 
         var input = CreateList(new int[] { 1, 1, 2, 3, 3 });
         var res37 = DeleteDuplicates(input);
-        
-        var res38 = IsSymmetric(new TreeNode(1,new TreeNode(2),new TreeNode(2)));
+
+        var res38 = IsSymmetric(new TreeNode(1, new TreeNode(2), new TreeNode(2)));
+        var res39 = HammingWeight(3);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1034,6 +1035,14 @@ public class Solution
         }
     }
     #endregion
+
+    public static int HammingWeight(int n)
+    {
+        string binary = Convert.ToString(n, 2);
+
+        return binary.Count(b => b == '1');
+    }
+
 
     #endregion
 
