@@ -43,6 +43,7 @@ public class Solution
         var res33 = LongestCommonPrefix(new string[] { "flower", "flow", "flight" });
         var res34 = PlusOne(new int[] { 1, 2, 3 });
         var res35 = PlusOne2(new int[] { 1, 2, 3 });
+        var res36 = Multiply("123456789", "987654321");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -57,8 +58,9 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res11);
+        Console.WriteLine(res36);
     }
+
     public static int SearchInsert(int[] nums, int target)
     {
         Array.Sort(nums);
@@ -858,6 +860,85 @@ public class Solution
 
     }
 
+    public static string Multiply(string num1, string num2)
+    {
+        List<BigInteger> number1 = new List<BigInteger>();
+        List<BigInteger> number2 = new List<BigInteger>();
+
+        foreach (var n in num1)
+            number1.Add(CharToDigit(n));
+
+        foreach (var n in num2)
+            number2.Add(CharToDigit(n));
+
+        BigInteger combined1 = CombineDigits(number1);
+        BigInteger combined2 = CombineDigits(number2);
+
+        return (combined1 * combined2).ToString();
+
+        int CharToDigit(char n)
+        {
+            switch (n)
+            {
+                case '0': return 0;
+                case '1': return 1;
+                case '2': return 2;
+                case '3': return 3;
+                case '4': return 4;
+                case '5': return 5;
+                case '6': return 6;
+                case '7': return 7;
+                case '8': return 8;
+                case '9': return 9;
+                default: throw new ArgumentException("Invalid character: " + n);
+            }
+        }
+
+        BigInteger CombineDigits(List<BigInteger> digits)
+        {
+            BigInteger result = 0;
+            foreach (var digit in digits)
+                result = result * 10 + digit;
+            return result;
+        }
+    }
+
+    public static string Multiply2(string num1, string num2)
+    {
+        List<BigInteger> number1 = new List<BigInteger>();
+        List<BigInteger> number2 = new List<BigInteger>();
+
+        foreach (var n in num1)
+        {
+            // for example n is 5 and 53 in ASCII and 0 is 48 in ASCII  so 53-48 = 5
+            if (n < '0' || n > '9')
+                throw new Exception("Argument error");
+            number1.Add(n - '0');
+        }
+
+        foreach (var n in num2)
+        {
+            if (n < '0' || n > '9')
+                throw new Exception("Argument error");
+            number2.Add(n - '0');
+        }
+
+        BigInteger combined1 = CombineDigits(number1);
+        BigInteger combined2 = CombineDigits(number2);
+
+        return (combined1 * combined2).ToString();
+
+        BigInteger CombineDigits(List<BigInteger> digits)
+        {
+            BigInteger result = 0;
+            foreach (var digit in digits)
+            {
+                result = result * 10 + digit;
+            }
+            return result;
+        }
+    }
+
     #region SQL
     public static string CombineTwoTable()
     {
@@ -983,7 +1064,7 @@ public class Solution
     }
 
     public static string PatientsWithACondition
-()
+    ()
     {
         string query = @"SELECT *
                          FROM Patients 
