@@ -50,7 +50,9 @@ public class Solution
 
         var res38 = IsSymmetric(new TreeNode(1, new TreeNode(2), new TreeNode(2)));
         var res39 = HammingWeight(3);
-        MoveZeroes(new int[] { 0,0, 0, 3, 12 });
+        MoveZeroes(new int[] { 0, 0, 0, 3, 12 });
+
+        var res40 = MissingNumber(new int[] { 2, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -65,7 +67,7 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res38);
+        Console.WriteLine(res40);
     }
 
     #region C#
@@ -1064,6 +1066,31 @@ public class Solution
             nums[index] = 0;
             index++;
         }
+    }
+
+    public static int MissingNumber(int[] nums)
+    {
+        Array.Sort(nums);
+
+        if (nums[0] != 0)
+            return 0;
+
+        for (int i = 1; i < nums.Length; ++i)
+        {
+            if (nums[i] - nums[i - 1] > 1)
+                return nums[i - 1] + 1;
+        }
+
+        return nums.Last() + 1;
+    }
+
+    public static int MissingNumber2(int[] nums)
+    {
+        int n = nums.Length;
+        int expectedSum = n * (n + 1) / 2;
+        int actualSum = nums.Sum();
+
+        return expectedSum - actualSum;
     }
 
     #endregion
