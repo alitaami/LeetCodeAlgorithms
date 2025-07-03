@@ -44,6 +44,9 @@ public class Solution
         var res34 = PlusOne(new int[] { 1, 2, 3 });
         var res35 = PlusOne2(new int[] { 1, 2, 3 });
         var res36 = Multiply("123456789", "987654321");
+    
+        var input = CreateList(new int[] { 1, 1, 2, 3, 3 });
+        var res37 = DeleteDuplicates(input);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -58,7 +61,7 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res36);
+        Console.WriteLine(res37);
     }
 
     public static int SearchInsert(int[] nums, int target)
@@ -938,6 +941,67 @@ public class Solution
             return result;
         }
     }
+
+    #region DeleteDuplicates
+    public static ListNode DeleteDuplicates(ListNode head)
+    {
+        ListNode current = head;
+        var uniqueNumbers = new HashSet<int>();
+
+        while (current != null)
+        {
+            uniqueNumbers.Add(current.val);
+
+            current = current.next;
+        }
+
+        ListNode result = new ListNode(0);
+        ListNode resultCurrent = result;
+
+        foreach (int val in uniqueNumbers) 
+        {
+            resultCurrent.next = new ListNode(val);
+            resultCurrent = resultCurrent.next;
+        }
+
+        return result.next;
+    }
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
+        }
+    }
+    public static ListNode CreateList(int[] values)
+    {
+        if (values == null || values.Length == 0) return null;
+
+        ListNode head = new ListNode(values[0]);
+        ListNode current = head;
+        for (int i = 1; i < values.Length; i++)
+        {
+            current.next = new ListNode(values[i]);
+            current = current.next;
+        }
+        return head;
+    }
+
+    public static List<int> ToList(ListNode head)
+    {
+        List<int> result = new List<int>();
+        while (head != null)
+        {
+            result.Add(head.val);
+            head = head.next;
+        }
+        return result;
+    }
+    #endregion
 
     #region SQL
     public static string CombineTwoTable()
