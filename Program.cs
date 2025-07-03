@@ -50,6 +50,7 @@ public class Solution
 
         var res38 = IsSymmetric(new TreeNode(1, new TreeNode(2), new TreeNode(2)));
         var res39 = HammingWeight(3);
+        MoveZeroes(new int[] { 0,0, 0, 3, 12 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1043,6 +1044,27 @@ public class Solution
         return binary.Count(b => b == '1');
     }
 
+    public static void MoveZeroes(int[] nums)
+    {
+        int index = 0;
+
+        // Move non-zero elements to the front
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] != 0)
+            {
+                nums[index] = nums[i];
+                index++;
+            }
+        }
+
+        // Fill the rest with zeros
+        while (index < nums.Length)
+        {
+            nums[index] = 0;
+            index++;
+        }
+    }
 
     #endregion
 
