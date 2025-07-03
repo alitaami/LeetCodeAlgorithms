@@ -1108,10 +1108,30 @@ public class Solution
 
             dict[c]--;
         }
-         
+
         return ' ';
     }
 
+    public static char FindTheDifference2(string s, string t)
+    {
+        int sum_S = s.Sum(s => s);
+        int sum_T = t.Sum(t => t);
+
+        return (char)(sum_T - sum_S);
+    }
+
+    public char FindTheDifference3(string s, string t)
+    {
+        int sumS = 0, sumT = 0;
+
+        foreach (char c in s)
+            sumS += c;
+
+        foreach (char c in t)
+            sumT += c;
+
+        return (char)(sumT - sumS);
+    }
 
     #endregion
 
