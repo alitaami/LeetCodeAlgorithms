@@ -53,6 +53,7 @@ public class Solution
         MoveZeroes(new int[] { 0, 0, 0, 3, 12 });
 
         var res40 = MissingNumber(new int[] { 2, 1 });
+        var res41 = FindTheDifference("abcd", "abcde");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -67,7 +68,7 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res40);
+        Console.WriteLine(res41);
     }
 
     #region C#
@@ -1092,6 +1093,25 @@ public class Solution
 
         return expectedSum - actualSum;
     }
+
+    public static char FindTheDifference(string s, string t)
+    {
+        var dict = new Dictionary<char, int>();
+
+        foreach (char c in s)
+            dict[c] = dict.ContainsKey(c) ? dict[c] + 1 : 1;
+
+        foreach (char c in t)
+        {
+            if (!dict.ContainsKey(c) || dict[c] == 0)
+                return c;
+
+            dict[c]--;
+        }
+         
+        return ' ';
+    }
+
 
     #endregion
 
