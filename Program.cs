@@ -44,9 +44,11 @@ public class Solution
         var res34 = PlusOne(new int[] { 1, 2, 3 });
         var res35 = PlusOne2(new int[] { 1, 2, 3 });
         var res36 = Multiply("123456789", "987654321");
-    
+
         var input = CreateList(new int[] { 1, 1, 2, 3, 3 });
         var res37 = DeleteDuplicates(input);
+        
+        var res38 = IsSymmetric(new TreeNode(1,new TreeNode(2),new TreeNode(2)));
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -61,8 +63,10 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res37);
+        Console.WriteLine(res38);
     }
+
+    #region C#
 
     public static int SearchInsert(int[] nums, int target)
     {
@@ -958,7 +962,7 @@ public class Solution
         ListNode result = new ListNode(0);
         ListNode resultCurrent = result;
 
-        foreach (int val in uniqueNumbers) 
+        foreach (int val in uniqueNumbers)
         {
             resultCurrent.next = new ListNode(val);
             resultCurrent = resultCurrent.next;
@@ -1001,6 +1005,36 @@ public class Solution
         }
         return result;
     }
+    #endregion
+
+    #region IsSymmetric
+    public class TreeNode
+    {
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
+        public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+        {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public static bool IsSymmetric(TreeNode root)
+    {
+        return CheckSymmetric(root.left, root.right);
+
+        bool CheckSymmetric(TreeNode left, TreeNode right)
+        {
+            if (right is null || left is null)
+                return left == right;
+
+            return (left.val == right.val) && CheckSymmetric(left.left, right.right) && CheckSymmetric(left.right, right.left);
+        }
+    }
+    #endregion
+
     #endregion
 
     #region SQL
