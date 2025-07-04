@@ -54,6 +54,7 @@ public class Solution
 
         var res40 = MissingNumber(new int[] { 2, 1 });
         var res41 = FindTheDifference("abcd", "abcde");
+        var res42 = IsSubsequence("acb", "ahbgdc");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1133,6 +1134,22 @@ public class Solution
         return (char)(sumT - sumS);
     }
 
+    public static bool IsSubsequence(string s, string t)
+    {
+        int i = 0;
+        foreach (char c in t)
+        {
+            if (i >= s.Length)
+                break;
+
+            if (c == s[i])
+            {
+                i++;
+            }
+        }
+
+        return i == s.Length;
+    }
     #endregion
 
     #region SQL
