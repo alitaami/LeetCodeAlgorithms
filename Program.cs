@@ -57,6 +57,7 @@ public class Solution
         var res42 = IsSubsequence("acb", "ahbgdc");
         var res43 = FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1 });
         var res44 = IsPerfectSquare(16);
+        SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1194,12 +1195,31 @@ public class Solution
         if (num is 1)
             return true;
 
-        for (int i = 1;  i <= num / 2; i++)
+        for (int i = 1; i <= num / 2; i++)
         {
             if (i * i == num)
                 return true;
         }
         return false;
+    }
+
+    public static void SortColors(int[] nums)
+    {
+        int index = 0, count0 = 0, count1 = 0, count2 = 0;
+
+        foreach (int num in nums)
+        {
+            if (num is 0)
+                count0++;
+            else if (num is 1)
+                count1++;
+            else
+                count2++;
+        }
+
+        for (int i = 0; i < count0; i++) { nums[index++] = 0; }
+        for (int i = 0; i < count1; i++) { nums[index++] = 1; }
+        for (int i = 0; i < count2; i++) { nums[index++] = 2; }
     }
 
     #endregion
