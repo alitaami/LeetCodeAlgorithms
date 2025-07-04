@@ -36,7 +36,7 @@ public class Solution
         var res26 = LargestNumber(new int[] { 10, 2 });
         var res27 = ContainsDuplicate(new int[] { 1, 2, 3, 1 });
         var res28 = Merge(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3);
-        var res29 = StrStr("sadbutsad", "sad");
+        var res29 = StrStr("sasbutsad", "sad");
         var res30 = IsPalindrome("AbBa");
         var res31 = MaxProfit(new int[] { 7, 1, 5, 3, 6, 4 });
         var res32 = IsPalindrome(-121);
@@ -699,9 +699,7 @@ public class Solution
     {
         for (int i = 0; i <= haystack.Length - needle.Length; i++)
         {
-            var subString = haystack.Substring(i, needle.Length);
-
-            if (subString == needle)
+            if (haystack.Substring(i, needle.Length) == needle)
                 return i;
         }
 
@@ -1197,7 +1195,7 @@ public class Solution
 
         return maxSet.Max();
     }
-
+     
     #endregion
 
     #region SQL
