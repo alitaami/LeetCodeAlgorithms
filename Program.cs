@@ -56,6 +56,7 @@ public class Solution
         var res41 = FindTheDifference("abcd", "abcde");
         var res42 = IsSubsequence("acb", "ahbgdc");
         var res43 = FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1 });
+        var res44 = IsPerfectSquare(16);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -109,7 +110,7 @@ public class Solution
     }
     public static int RemoveDuplicates(int[] nums)
     {
-        int index =1;
+        int index = 1;
         if (nums.Length == 0)
             return 0;
 
@@ -1186,6 +1187,19 @@ public class Solution
         }
 
         return maxSet.Max();
+    }
+
+    public static bool IsPerfectSquare(int num)
+    {
+        if (num is 1)
+            return true;
+
+        for (int i = 1;  i <= num / 2; i++)
+        {
+            if (i * i == num)
+                return true;
+        }
+        return false;
     }
 
     #endregion
