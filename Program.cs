@@ -109,26 +109,20 @@ public class Solution
     }
     public static int RemoveDuplicates(int[] nums)
     {
-        Array.Sort(nums);
+        int index =1;
+        if (nums.Length == 0)
+            return 0;
 
-        var dict = new Dictionary<int, int>();
-
-        foreach (var item in nums)
+        for (int i = 1; i < nums.Length; i++)
         {
-            if (dict.ContainsKey(item))
+            if (nums[i] != nums[i - 1])
             {
-                if (dict[item] < 2)
-                {
-                    dict[item] += 1;
-                }
-            }
-            else
-            {
-                dict.Add(item, 1);
+                nums[index] = nums[i];
+                index++;
             }
         }
 
-        return dict.Sum(d => d.Value);
+        return index;
     }
 
     public static int LengthOfLastWord(string s)
