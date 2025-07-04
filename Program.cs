@@ -800,11 +800,10 @@ public class Solution
     public static string LongestCommonPrefix(string[] strs)
     {
         HashSet<string> words = new HashSet<string>(strs);
-        int min = strs.Min(c => c.Length);
+        var shortestWord = strs.MinBy(c => c.Length);
 
-        string shortestWord = strs.FirstOrDefault(c => c.Length == min);
-        string prefix = string.Empty;
         string startsWithString = string.Empty;
+        string prefix = string.Empty;
 
         for (int i = 0; i < shortestWord.Length; i++)
         {
@@ -814,7 +813,6 @@ public class Solution
                 break;
             else
                 prefix += shortestWord[i];
-            continue;
         }
 
         return prefix;
@@ -1195,7 +1193,7 @@ public class Solution
 
         return maxSet.Max();
     }
-     
+
     #endregion
 
     #region SQL
