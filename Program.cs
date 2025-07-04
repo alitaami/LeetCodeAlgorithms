@@ -55,6 +55,7 @@ public class Solution
         var res40 = MissingNumber(new int[] { 2, 1 });
         var res41 = FindTheDifference("abcd", "abcde");
         var res42 = IsSubsequence("acb", "ahbgdc");
+        var res43 = FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1149,6 +1150,52 @@ public class Solution
         }
 
         return i == s.Length;
+    }
+
+    public static int FindMaxConsecutiveOnes(int[] nums)
+    {
+        int max = 0;
+        int temp = 0;
+
+        foreach (int x in nums)
+        {
+            if (x is 1)
+            {
+                temp++;
+
+                max = Math.Max(max, temp);
+            }
+            else
+                temp = 0;
+        }
+
+        return max;
+    }
+
+    public static int FindMaxConsecutiveOnes2(int[] nums)
+    {
+        int max = 0;
+        HashSet<int> maxSet = new HashSet<int>();
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == 1)
+            {
+                max++;
+
+                if (nums.Length - 1 == i)
+                {
+                    maxSet.Add(max);
+                }
+            }
+            else
+            {
+                maxSet.Add(max);
+                max = 0;
+            }
+        }
+
+        return maxSet.Max();
     }
 
     #endregion
