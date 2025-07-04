@@ -30,7 +30,7 @@ public class Solution
         var res20 = MyAtoi("-42");
         var res21 = Divide(10, 3);
         var res22 = WordPattern("abab", "dog dog dog dog");
-        var res23 = ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
+        ReverseString(new char[] { 'h', 'e', 'l', 'l', 'o' });
         var res24 = AddStrings("11", "123");
         var res25 = ValidIPAddress("172.16.254.1");
         var res26 = LargestNumber(new int[] { 10, 2 });
@@ -568,21 +568,21 @@ public class Solution
         return true;
     }
 
-    public static string ReverseString(char[] s)
+    public static void ReverseString(char[] s)
     {
         int left = 0;
         int right = s.Length - 1;
+        char temp = ' ';
 
         while (left < right)
         {
-            char t = s[left];
+            temp = s[left];
             s[left] = s[right];
-            s[right] = t;
+            s[right] = temp;
+
             left++;
             right--;
         }
-
-        return "";
     }
 
     public static string AddStrings(string num1, string num2)
@@ -1150,6 +1150,7 @@ public class Solution
 
         return i == s.Length;
     }
+
     #endregion
 
     #region SQL
