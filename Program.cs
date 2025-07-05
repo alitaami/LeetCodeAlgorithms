@@ -59,6 +59,7 @@ public class Solution
         var res44 = IsPerfectSquare(16);
         var res45 = WordBreak("carsanddog", new List<string> { "car", "cars", "and", "dog", "code" });
         var res46 = AddDigits(38);
+        var res47 = IsUgly(6);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1260,6 +1261,20 @@ public class Solution
         }
 
         return int.Parse(number);
+    }
+    public static bool IsUgly(long n)
+    {
+        if (n <= 0) return false;
+
+        foreach (var divisor in new[] { 2, 3, 5 })
+        {
+            while (n % divisor == 0)
+            {
+                n /= divisor;
+            }
+        }
+
+        return n == 1;
     }
     #endregion
 
