@@ -62,6 +62,7 @@ public class Solution
         var res47 = IsUgly(6);
         var res48 = ReverseVowels("A man, a plan, a canal -- Panama");
         var res49 = FirstUniqChar("leetcode");
+        var res50 = CountSegments("Hello, my name is John");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1361,6 +1362,24 @@ public class Solution
 
         return minIndex is int.MaxValue ? -1 : minIndex;
     }
+
+    public static int CountSegments(string s)
+    { 
+        if (string.IsNullOrWhiteSpace(s))
+            return 0;
+
+        var text = s.Trim().Split(' ');
+
+        return text.Count(s => s != "");
+    }
+    public static int CountSegments2(string s)
+    {
+        if (string.IsNullOrWhiteSpace(s))
+            return 0;
+
+        return s.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
+    }
+
     #endregion
 
     #region SQL
