@@ -60,6 +60,7 @@ public class Solution
         var res45 = WordBreak("carsanddog", new List<string> { "car", "cars", "and", "dog", "code" });
         var res46 = AddDigits(38);
         var res47 = IsUgly(6);
+        var res48 = ReverseVowels("A man, a plan, a canal -- Panama");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -75,7 +76,7 @@ public class Solution
         var sqlProblem9 = AverageSellingPrice();
         var sqlProblem10 = PatientsWithACondition();
 
-        Console.WriteLine(res41);
+        Console.WriteLine(res48);
     }
 
     #region C#
@@ -1275,6 +1276,45 @@ public class Solution
         }
 
         return n == 1;
+    }
+
+    public static string ReverseVowels(string s)
+    {
+        var text = s.ToCharArray();
+        var existVowels = new List<char> { };
+        var vowels = new HashSet<char> { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+
+        for (int i = 0; i < text.Length; i++)
+        {
+            if (vowels.Contains(text[i]))
+            {
+                existVowels.Add(text[i]);
+                text[i] = '*';
+            }
+        }
+
+        int left = 0, right = existVowels.Count - 1;
+        char temp = ' ';
+
+        while (left < right)
+        {
+            temp = existVowels[left];
+            existVowels[left] = existVowels[right];
+            existVowels[right] = temp;
+
+            left++;
+            right--;
+        }
+
+        int index = 0;
+        for (int j = 0; j < text.Length; j++)
+        {
+            if (text[j] == '*')
+            {
+                text[j] = existVowels[index++];
+            }
+        }
+        return new string(text);
     }
     #endregion
 
