@@ -61,6 +61,7 @@ public class Solution
         var res46 = AddDigits(38);
         var res47 = IsUgly(6);
         var res48 = ReverseVowels("A man, a plan, a canal -- Panama");
+        var res49 = FirstUniqChar("leetcode");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1315,6 +1316,50 @@ public class Solution
             }
         }
         return new string(text);
+    }
+
+    public static int FirstUniqChar(string s)
+    {
+        int minIndex = int.MaxValue;
+        var dic = new Dictionary<char, int>();
+
+        foreach (char c in s)
+        {
+            if (dic.ContainsKey(c))
+                dic[c]++;
+            else
+                dic[c] = 1;
+        }
+
+        foreach (var kvp in dic.Where(d => d.Value == 1))
+        {
+            minIndex = Math.Min(s.IndexOf(kvp.Key), minIndex);
+        }
+
+        return minIndex == int.MaxValue ? -1 : minIndex;
+    }
+    public static int FirstUniqChar2(string s)
+    {
+        int minIndex = int.MaxValue;
+        var dic = new Dictionary<char, (int count, int index)>();
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (dic.ContainsKey(s[i]))
+            {
+                dic[s[i]] = (dic[s[i]].count + 1, dic[s[i]].index);
+            }
+            else
+                dic[s[i]] = (1, i);
+        }
+
+        foreach (var kvp in dic)
+        {
+            if (kvp.Value.count == 1)
+                minIndex = Math.Min(kvp.Value.index, minIndex);
+        }
+
+        return minIndex is int.MaxValue ? -1 : minIndex;
     }
     #endregion
 
