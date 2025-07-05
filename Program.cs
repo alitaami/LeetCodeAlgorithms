@@ -57,7 +57,8 @@ public class Solution
         var res42 = IsSubsequence("acb", "ahbgdc");
         var res43 = FindMaxConsecutiveOnes(new int[] { 1, 1, 0, 1, 1, 1 });
         var res44 = IsPerfectSquare(16);
-        var res45 = WordBreak("carsanddog", new List<string> { "car","cars","and","dog", "code" });
+        var res45 = WordBreak("carsanddog", new List<string> { "car", "cars", "and", "dog", "code" });
+        var res46 = AddDigits(38);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1224,7 +1225,7 @@ public class Solution
     }
 
     public static bool WordBreak(string s, IList<string> wordDict)
-    { 
+    {
         // it is ok for most of case 
         // TODO: finish it`s implementation
 
@@ -1239,9 +1240,27 @@ public class Solution
             }
         }
 
-        return s.Length == 0 ;
-    } 
+        return s.Length == 0;
+    }
 
+    public static int AddDigits(int num)
+    {
+        var number = num.ToString();
+        int sum = 0;
+
+        while (number.Length > 1)
+        {
+            sum = 0;
+            foreach (var n in number)
+            {
+                sum += int.Parse(n.ToString());
+            }
+
+            number = sum.ToString();
+        }
+
+        return int.Parse(number);
+    }
     #endregion
 
     #region SQL
