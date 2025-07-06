@@ -66,6 +66,7 @@ public class Solution
         var res51 = LongestPalindrome("abccccdd");
         var res52 = ThirdMax(new int[] { 1, 2 });
         var res53 = NumberOfArithmeticSlices(new int[] { 1, 3, 5, 7 });
+        var res54 = ArrangeCoins(8);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1483,6 +1484,18 @@ public class Solution
         }
 
         return total;
+    }
+
+    public static int ArrangeCoins(int n)
+    {
+        int row = 0;
+        while (n > row)
+        {
+            row++;
+            n -= row;
+        }
+
+        return row;
     }
     #endregion
 
