@@ -64,6 +64,7 @@ public class Solution
         var res49 = FirstUniqChar("leetcode");
         var res50 = CountSegments("Hello, my name is John");
         var res51 = LongestPalindrome("abccccdd");
+        var res52 = ThirdMax(new int[] { 1, 2 });
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1399,7 +1400,36 @@ public class Solution
 
         return set.Count > 0 ? maxLength + 1 : maxLength;
     }
-     
+
+    public static int ThirdMax(int[] nums)
+    {
+        nums = nums
+                   .Select(n => n)
+                   .Distinct()
+                   .OrderByDescending(n => n)
+                   .ToArray();
+
+        return
+            nums.Length >= 3 ? nums[2] :
+            nums.Length > 0 ? nums[0] :
+            0;
+    }
+    public static int ThirdMax2(int[] nums)
+    {
+        HashSet<int> set = new HashSet<int>();
+        foreach (int num in nums)
+        {
+            set.Add(num);
+
+            if (set.Count > 3)
+                set.Remove(set.Min());
+        }
+
+        if (set.Count < 3)
+            return set.Max();
+
+        return set.Min();
+    }
     #endregion
 
     #region SQL
