@@ -63,6 +63,7 @@ public class Solution
         var res48 = ReverseVowels("A man, a plan, a canal -- Panama");
         var res49 = FirstUniqChar("leetcode");
         var res50 = CountSegments("Hello, my name is John");
+        var res51 = LongestPalindrome("abccccdd");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1364,7 +1365,7 @@ public class Solution
     }
 
     public static int CountSegments(string s)
-    { 
+    {
         if (string.IsNullOrWhiteSpace(s))
             return 0;
 
@@ -1380,6 +1381,25 @@ public class Solution
         return s.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length;
     }
 
+    public static int LongestPalindrome(string s)
+    {
+        var set = new HashSet<char>();
+        var maxLength = 0;
+
+        foreach (var c in s)
+        {
+            if (set.Contains(c))
+            {
+                set.Remove(c);
+                maxLength += 2;
+            }
+            else
+                set.Add(c);
+        }
+
+        return set.Count > 0 ? maxLength + 1 : maxLength;
+    }
+     
     #endregion
 
     #region SQL
