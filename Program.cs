@@ -597,6 +597,41 @@ public class Solution
 
         return (number1 + number2).ToString();
     }
+    public static string AddStrings2(string num1, string num2)
+    {
+        int i = num1.Length - 1;
+        int j = num2.Length - 1;
+        int carry = 0;
+        var result = new StringBuilder();
+
+        while (i >= 0 || j >= 0 || carry > 0)
+        {
+            int digit1 = i >= 0 ? num1[i] - '0' : 0;
+            int digit2 = j >= 0 ? num2[j] - '0' : 0;
+
+            int sum = digit1 + digit2 + carry;
+            result.Append(sum % 10);
+            carry = sum / 10;
+
+            i--;
+            j--;
+        }
+
+        char temp = ' ';
+        int left = 0;
+        int right = result.Length - 1;
+
+        while (left < right)
+        {
+            temp = result[left];
+            result[left] = result[right];
+            result[right] = temp;
+            left++;
+            right--;
+        }
+
+        return result.ToString();
+    }
 
     public static string ValidIPAddress(string queryIP)
     {
