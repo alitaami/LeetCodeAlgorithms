@@ -65,6 +65,7 @@ public class Solution
         var res50 = CountSegments("Hello, my name is John");
         var res51 = LongestPalindrome("abccccdd");
         var res52 = ThirdMax(new int[] { 1, 2 });
+        var res53 = NumberOfArithmeticSlices(new int[] { 1, 3, 5, 7 });
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1464,6 +1465,24 @@ public class Solution
             return set.Max();
 
         return set.Min();
+    }
+
+    public static int NumberOfArithmeticSlices(int[] nums)
+    {
+        int count = 0, total = 0;
+
+        for (int i = 0; i < nums.Length - 2; i++)
+        {
+            if (nums[i + 1] - nums[i] == nums[i + 2] - nums[i + 1])
+            {
+                count++;
+                total += count;
+            }
+            else
+                count = 0;
+        }
+
+        return total;
     }
     #endregion
 
