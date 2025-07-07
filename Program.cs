@@ -67,6 +67,7 @@ public class Solution
         var res52 = ThirdMax(new int[] { 1, 2 });
         var res53 = NumberOfArithmeticSlices(new int[] { 1, 3, 5, 7 });
         var res54 = ArrangeCoins(8);
+        var res55 = FindComplement(5);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1496,6 +1497,20 @@ public class Solution
         }
 
         return row;
+    }
+
+    public static int FindComplement(int num)
+    {
+        var binary = Convert.ToString(num, 2).ToCharArray();
+
+        for (int i = 0; i < binary.Length; i++)
+        {
+            binary[i] = (binary[i] == '1' ? '0' : '1');
+        }
+
+        string number = new string(binary);
+
+        return Convert.ToInt32(number, 2);
     }
     #endregion
 
