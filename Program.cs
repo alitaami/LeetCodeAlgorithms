@@ -68,6 +68,7 @@ public class Solution
         var res53 = NumberOfArithmeticSlices(new int[] { 1, 3, 5, 7 });
         var res54 = ArrangeCoins(8);
         var res55 = FindComplement(5);
+        var res56 = CheckPerfectNumber(28);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1512,6 +1513,25 @@ public class Solution
 
         return Convert.ToInt32(number, 2);
     }
+
+    public static bool CheckPerfectNumber(int num)
+    {
+        if (num <= 1)
+            return false;
+
+        // The first proper divisor of every number is 1
+        int sum = 1;
+
+        // So we start from 2
+        for (int i = 2; i <= num / 2; i++)
+        {
+            if (num % i == 0)
+                sum += i;
+        }
+
+        return sum == num;
+    }
+
     #endregion
 
     #region SQL
