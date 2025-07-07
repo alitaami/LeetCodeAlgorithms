@@ -69,6 +69,7 @@ public class Solution
         var res54 = ArrangeCoins(8);
         var res55 = FindComplement(5);
         var res56 = CheckPerfectNumber(28);
+        var res57 = DetectCapitalUse("FLaG");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1532,9 +1533,44 @@ public class Solution
         return sum == num;
     }
 
+    public static bool DetectCapitalUse(string word)
+    {
+        return word.All(c => char.IsUpper(c)) ||
+               word.All(c => char.IsLower(c)) ||
+               char.IsUpper(word[0]) && word.Substring(1).All(c => char.IsLower(c));
+    }
+    public bool DetectCapitalUse2(string word)
+    {
+        if (word.Length <= 1)
+            return true;
+
+        bool isFirstUpper = char.IsUpper(word[0]);
+        bool isSecondUpper = char.IsUpper(word[1]);
+
+        // Case 1: All letters must be uppercase
+        if (isFirstUpper && isSecondUpper)
+        {
+            for (int i = 2; i < word.Length; i++)
+            {
+                if (!char.IsUpper(word[i]))
+                    return false;
+            }
+            return true;
+        }
+
+        // Case 2: All letters except the first must be lowercase
+        for (int i = 1; i < word.Length; i++)
+        {
+            if (!char.IsLower(word[i]))
+                return false;
+        }
+
+        return true;
+    }
+
     #endregion
 
-    #region SQL
+        #region SQL
     public static string CombineTwoTable()
     {
         string query = @"
