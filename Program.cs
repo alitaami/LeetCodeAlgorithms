@@ -71,6 +71,7 @@ public class Solution
         var res56 = CheckPerfectNumber(28);
         var res57 = DetectCapitalUse("FLaG");
         var res58 = FindLUSlength("aaa", "bbb");
+        var res59 = ReverseStr_2("abcdefg", 2);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1575,6 +1576,66 @@ public class Solution
             return -1;
 
         return Math.Max(a.Length, b.Length);
+    }
+
+    public static string ReverseStr_2(string s, int k)
+    {
+        if (s.Length < k)
+        {
+            var res = s.ToCharArray();
+            Array.Reverse(res);
+            return new string(res);
+        }
+
+        var sb1 = new List<char>();
+        var sb2 = new List<char>();
+        var sb3 = new List<char>();
+        var sb4 = new List<char>();
+
+        // Reverse first k characters
+        for (int i = k - 1; i >= 0; i--)
+        {
+            sb1.Add(s[i]);
+        }
+
+        // If 2k ≤ s.Length
+        if (s.Length >= 2 * k)
+        {
+            // Next k characters remain the same
+            for (int i = k; i < 2 * k; i++)
+            {
+                sb2.Add(s[i]);
+            }
+
+            // Remaining characters: reverse every first k in 2k block
+            for (int i = 2 * k; i < s.Length; i += 2 * k)
+            {
+                int end = Math.Min(i + k, s.Length);
+
+                // Reverse first k characters
+                for (int j = end - 1; j >= i; j--)
+                {
+                    sb3.Add(s[j]);
+                }
+
+                // Append next k as-is
+                for (int j = end; j < Math.Min(i + 2 * k, s.Length); j++)
+                {
+                    sb3.Add(s[j]);
+                }
+            }
+        }
+        // If remaining < 2k but ≥ k
+        else if (s.Length < 2 * k && s.Length >= k)
+        {
+            // Add remaining after first k in same order
+            for (int i = k; i < s.Length; i++)
+            {
+                sb3.Add(s[i]);
+            }
+        }
+
+        return new string(sb1.ToArray()) + new string(sb2.ToArray()) + new string(sb3.ToArray()) + new string(sb4.ToArray());
     }
     #endregion
 
