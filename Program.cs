@@ -70,6 +70,7 @@ public class Solution
         var res55 = FindComplement(5);
         var res56 = CheckPerfectNumber(28);
         var res57 = DetectCapitalUse("FLaG");
+        var res58 = FindLUSlength("aaa", "bbb");
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1568,9 +1569,16 @@ public class Solution
         return true;
     }
 
+    public static int FindLUSlength(string a, string b)
+    {
+        if (string.Equals(a, b))
+            return -1;
+
+        return Math.Max(a.Length, b.Length);
+    }
     #endregion
 
-        #region SQL
+    #region SQL
     public static string CombineTwoTable()
     {
         string query = @"
