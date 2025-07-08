@@ -72,6 +72,7 @@ public class Solution
         var res57 = DetectCapitalUse("FLaG");
         var res58 = FindLUSlength("aaa", "bbb");
         var res59 = ReverseStr_2("abcdefg", 2);
+        var res60 = IntegerReplacement(8);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1636,6 +1637,36 @@ public class Solution
         }
 
         return new string(sb1.ToArray()) + new string(sb2.ToArray()) + new string(sb3.ToArray()) + new string(sb4.ToArray());
+    }
+
+    public static int IntegerReplacement(int n)
+    {
+        int counter = 0;
+       
+        if (n == int.MaxValue)
+            return 32;
+       
+        while (n > 1)
+        {
+            if (n % 2 == 0)
+            {
+                n /= 2;
+            }
+            // 9 → 10 → 5 → 4 → 2 → 1 (4steps)❌  ,  9 → 8 → 4 → 2 → 1 (3steps)✅ 
+            // 3 -> 4 -> 2 -> 1 → ❌ 3 steps  ,  3 -> 2 -> 1 → ✅ 2 steps
+            else if (n == 3 || (n & 2) == 0)
+            {
+                n--;
+            }
+            else
+            {
+                n++;
+            }
+
+            counter++;
+        }
+
+        return counter;
     }
     #endregion
 
