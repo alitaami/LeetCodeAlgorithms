@@ -73,6 +73,7 @@ public class Solution
         var res58 = FindLUSlength("aaa", "bbb");
         var res59 = ReverseStr_2("abcdefg", 2);
         var res60 = IntegerReplacement(8);
+        var res61 = FindNthDigit(11);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1642,10 +1643,10 @@ public class Solution
     public static int IntegerReplacement(int n)
     {
         int counter = 0;
-       
+
         if (n == int.MaxValue)
             return 32;
-       
+
         while (n > 1)
         {
             if (n % 2 == 0)
@@ -1668,6 +1669,62 @@ public class Solution
 
         return counter;
     }
+
+    public static int FindNthDigit(int n)
+    {
+        List<int> digits = new List<int>();
+        string number = string.Empty;
+
+        for (int i = 1; i <= n; i++)
+        {
+            number = i.ToString();
+            if (i > 9)
+            {
+                foreach (char d in number)
+                {
+                    if (d == '0')
+                        digits.Add(int.Parse("0"));
+                    else
+                        digits.Add(d - '0');
+                }
+            }
+            else
+            {
+                digits.Add(i);
+            }
+        }
+
+        return digits[n - 1];
+    }
+    public static int FindNthDigit2(int n)
+    {
+        n = 3;
+        int i = 1, counter = 0;
+        string number = string.Empty;
+
+        while (i <= n)
+        {
+            if (i > 9)
+            {
+                number = i.ToString();
+
+                if (counter + number.Length >= n)
+                {
+                    return int.Parse(number[n - counter - 1].ToString());
+                }
+                else
+                    counter += number.Length;
+            }
+            else
+                counter++;
+
+            i++;
+        }
+
+        return counter;
+
+    }
+ 
     #endregion
 
     #region SQL
