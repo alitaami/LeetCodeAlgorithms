@@ -90,6 +90,7 @@ public class Solution
 
         var res67 = ToLowerCase("HeLLO");
         var res68 = IsOneBitCharacter(new int[] { 1, 1, 1, 0 });
+        var res69 = SelfDividingNumbers(1, 22);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2007,9 +2008,66 @@ public class Solution
                 i += 1;  // 1-bit character
         }
         // True if the last char is a 1-bit
-        return i == bits.Length - 1; 
+        return i == bits.Length - 1;
     }
 
+    public static IList<int> SelfDividingNumbers(int left, int right)
+    {
+        var list = new List<int>();
+        string temp = string.Empty;
+
+        while (left <= right)
+        {
+            temp = left.ToString();
+
+            if (left < 10)
+                list.Add(left);
+            else if (!temp.Contains('0'))
+            {
+                bool flag = true;
+                foreach (var n in temp)
+                {
+                    if (n != '0')
+                        if (left % (n - '0') != 0)
+                        {
+                            flag = false;
+                            break;
+                        }
+                }
+
+                if (flag)
+                    list.Add(left);
+            }
+
+            left++;
+        }
+
+        return list;
+    }
+    public static IList<int> SelfDividingNumbers2(int left, int right)
+    {
+        var list = new List<int>();
+        string temp = string.Empty;
+
+        for (int i = left; i <= right; i++)
+        {
+            temp = i.ToString();
+
+            for (int j = 0; j < temp.Length; j++)
+            {
+                if (temp[j] == '0')
+                    break;
+                if (i % (temp[j] - '0') != 0)
+                    break;
+                if (j == temp.Length - 1)
+                {
+                    list.Add(i);
+                }
+            }
+        }
+
+        return list;
+    }
     #endregion
 
     #region SQL
