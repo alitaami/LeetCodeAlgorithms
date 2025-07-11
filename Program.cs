@@ -76,6 +76,7 @@ public class Solution
         var res61 = FindNthDigit(11);
         var res62 = FindTargetSumWays(new int[] { 1, 1, 1, 1, 1 }, 3);
         var res63 = FindRelativeRanks(new int[] { 10, 3, 8, 9, 4 });
+        var res64 = ArrayPairSum(new int[] { 1, 4, 3, 2 });
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1810,6 +1811,22 @@ public class Solution
 
         return result;
     }
+
+    public static int ArrayPairSum(int[] nums)
+    {
+        Array.Sort(nums);  
+
+        int sum = 0;
+
+        // Add every alternate number (first of each pair)
+        for (int i = 0; i < nums.Length; i += 2)
+        {
+            sum += nums[i];
+        }
+
+        return sum;
+    }
+
     #endregion
 
     #region SQL
