@@ -74,6 +74,7 @@ public class Solution
         var res59 = ReverseStr_2("abcdefg", 2);
         var res60 = IntegerReplacement(8);
         var res61 = FindNthDigit(11);
+        var res62 = FindTargetSumWays(new int[] { 1, 1, 1, 1, 1 }, 3);
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1670,7 +1671,7 @@ public class Solution
         return counter;
     }
 
-    public static int FindNthDigit(int n)
+    public static int FindNthDigit1(int n)
     {
         List<int> digits = new List<int>();
         string number = string.Empty;
@@ -1696,9 +1697,8 @@ public class Solution
 
         return digits[n - 1];
     }
-    public static int FindNthDigit2(int n)
+    public static int FindNthDigit(int n)
     {
-        n = 3;
         int i = 1, counter = 0;
         string number = string.Empty;
 
@@ -1724,7 +1724,39 @@ public class Solution
         return counter;
 
     }
- 
+
+    public static int FindTargetSumWays(int[] nums, int target)
+    {
+        int count = 0;
+        int n = nums.Length;
+        int totalCombinations = (int)Math.Pow(2,n); 
+
+        for (int mask = 0; mask < totalCombinations; mask++)
+        {
+            int sum = 0;
+            List<int> combination = new List<int>(); 
+
+            for (int i = 0; i < n; i++)
+            {
+                if (((mask >> i) & 1) == 1)
+                {
+                    sum += nums[i];        
+                    combination.Add(nums[i]);
+                }
+                else
+                {
+                    sum -= nums[i];        
+                    combination.Add(-nums[i]);
+                }
+            }
+             
+            if (sum == target)
+                count++;
+        }
+
+        return count;
+    }
+
     #endregion
 
     #region SQL
