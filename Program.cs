@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -78,6 +79,8 @@ public class Solution
         var res63 = FindRelativeRanks(new int[] { 10, 3, 8, 9, 4 });
         var res64 = ArrayPairSum(new int[] { 1, 4, 3, 2 });
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
+        var res65 = new MyHashSet();
+        res65.Add(10);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1814,7 +1817,7 @@ public class Solution
 
     public static int ArrayPairSum(int[] nums)
     {
-        Array.Sort(nums);  
+        Array.Sort(nums);
 
         int sum = 0;
 
@@ -1826,6 +1829,56 @@ public class Solution
 
         return sum;
     }
+
+    #region Design HashSet
+    // The fastest and most memory efficient solution
+    public class MyHashSet
+    {
+        // I assigned 1000001 because the Max value in testcases is 1000000 to start BitArray from 0 to 1000000
+        private BitArray array = new(1000001);
+
+        public void Add(int key)
+        => array[key] = true;
+
+        public void Remove(int key)
+        => array[key] = false;
+
+        public bool Contains(int key)
+        => array[key];
+    }
+    public class MyHashSet2
+    {
+        // I assigned 1000001 because the Max value in testcases is 1000000 to start BitArray from 0 to 1000000
+        bool[] array = new bool[1000001];
+
+        public void Add(int key)
+        => array[key] = true;
+
+        public void Remove(int key)
+        => array[key] = false;
+
+        public bool Contains(int key)
+        => array[key];
+    }
+
+    public class MyHashSet3
+    {
+        private List<int> list = new List<int>();
+
+        public void Add(int key)
+        {
+            if (!list.Contains(key))
+                list.Add(key);
+        }
+
+        public void Remove(int key)
+        => list.Remove(key);
+
+        public bool Contains(int key)
+        => list.Contains(key);
+    }
+
+    #endregion
 
     #endregion
 
