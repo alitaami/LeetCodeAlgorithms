@@ -82,6 +82,12 @@ public class Solution
         var res65 = new MyHashSet();
         res65.Add(10);
 
+        var res66 = new MyHashMap();
+        res66.Put(1, 1);
+        res66.Get(1);
+        res66.Put(1, 2);
+        res66.Remove(1);
+
         // SQL
         var sqlProblem = CombineTwoTable();
         var sqlProblem1 = DuplicateEmails();
@@ -1876,6 +1882,72 @@ public class Solution
 
         public bool Contains(int key)
         => list.Contains(key);
+    }
+
+    #endregion
+
+    #region Design HashMap
+    public class MyHashMap
+    {
+        (int? key, int? value)[] map = new (int?, int?)[3400]; // Max possible index according to test cases
+
+        public void Put(int key, int value)
+        {
+            for (int i = 0; i < map.Length; i++)
+            {
+                if (map[i].key == key)
+                {
+                    map[i].value = value;
+                    return;
+                }
+            }
+
+            for (int i = 0; i < map.Length; i++)
+            {
+                if (map[i].key == null)
+                {
+                    map[i] = (key, value);
+                    return;
+                }
+            }
+        }
+
+        public int Get(int key)
+            => map.FirstOrDefault(m => m.key == key).value ?? -1;
+
+        public void Remove(int key)
+        {
+            for (int i = 0; i < map.Length; i++)
+            {
+                if (map[i].key == key)
+                {
+                    map[i].value = null;
+                }
+            }
+        }
+    }
+
+    public class MyHashMap2
+    {
+        int?[] map;
+
+        public MyHashMap2()
+        {
+            map = new int?[1000001]; // Max number that exists in testcases
+        }
+
+        public void Put(int key, int value)
+        {
+            map[key] = value;
+        }
+
+        public int Get(int key)
+        => map[key] ?? -1;
+
+        public void Remove(int key)
+        {
+            map[key] = null;
+        }
     }
 
     #endregion
