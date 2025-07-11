@@ -89,6 +89,7 @@ public class Solution
         res66.Remove(1);
 
         var res67 = ToLowerCase("HeLLO");
+        var res68 = IsOneBitCharacter(new int[] { 1, 1, 1, 0 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -1993,6 +1994,20 @@ public class Solution
         }
 
         return sb.ToString();
+    }
+
+    public static bool IsOneBitCharacter(int[] bits)
+    {
+        int i = 0;
+        while (i < bits.Length - 1)
+        {
+            if (bits[i] == 1)
+                i += 2;  // 2-bit character
+            else
+                i += 1;  // 1-bit character
+        }
+        // True if the last char is a 1-bit
+        return i == bits.Length - 1; 
     }
 
     #endregion
