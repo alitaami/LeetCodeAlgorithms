@@ -88,6 +88,8 @@ public class Solution
         res66.Put(1, 2);
         res66.Remove(1);
 
+        var res67 = ToLowerCase("HeLLO");
+
         // SQL
         var sqlProblem = CombineTwoTable();
         var sqlProblem1 = DuplicateEmails();
@@ -1973,6 +1975,25 @@ public class Solution
     }
 
     #endregion
+
+    public static string ToLowerCase(string s)
+    => s.ToLower();
+
+    // Fastest and most memory efficient solution
+    public string ToLowerCase2(string s)
+    {
+        // explanation => 'a' is 97 in ASCII and 'A' is 65 in ASCII and there is a 32 digits gap between upper and lower cases
+        int diff = 'a' - 'A';
+        StringBuilder sb = new StringBuilder(s);
+
+        for (int i = 0; i < sb.Length; i++)
+        {
+            if (char.IsUpper(sb[i]))
+                sb[i] = (char)(sb[i] + diff);
+        }
+
+        return sb.ToString();
+    }
 
     #endregion
 
