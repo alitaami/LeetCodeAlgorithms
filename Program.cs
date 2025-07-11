@@ -1949,6 +1949,28 @@ public class Solution
             map[key] = null;
         }
     }
+    public class MyHashMap3
+    {
+        int[] map = new int[1000001];
+
+        public MyHashMap3()
+        {
+            Array.Fill<int>(map, -1);
+        }
+
+        public void Put(int key, int value)
+        {
+            map[key] = value;
+        }
+
+        public int Get(int key)
+        => map[key];
+
+        public void Remove(int key)
+        {
+            map[key] = -1;
+        }
+    }
 
     #endregion
 
