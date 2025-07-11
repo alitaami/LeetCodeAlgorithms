@@ -75,6 +75,7 @@ public class Solution
         var res60 = IntegerReplacement(8);
         var res61 = FindNthDigit(11);
         var res62 = FindTargetSumWays(new int[] { 1, 1, 1, 1, 1 }, 3);
+        var res63 = FindRelativeRanks(new int[] { 10, 3, 8, 9, 4 });
         SortColors(new int[] { 1, 1, 2, 3, 2, 0, 0 });
 
         // SQL
@@ -1729,34 +1730,86 @@ public class Solution
     {
         int count = 0;
         int n = nums.Length;
-        int totalCombinations = (int)Math.Pow(2,n); 
+        int totalCombinations = (int)Math.Pow(2, n);
 
         for (int mask = 0; mask < totalCombinations; mask++)
         {
             int sum = 0;
-            List<int> combination = new List<int>(); 
+            List<int> combination = new List<int>();
 
             for (int i = 0; i < n; i++)
             {
                 if (((mask >> i) & 1) == 1)
                 {
-                    sum += nums[i];        
+                    sum += nums[i];
                     combination.Add(nums[i]);
                 }
                 else
                 {
-                    sum -= nums[i];        
+                    sum -= nums[i];
                     combination.Add(-nums[i]);
                 }
             }
-             
+
             if (sum == target)
                 count++;
         }
 
         return count;
     }
+    public static string[] FindRelativeRanks(int[] score)
+    {
+        var scores = score.Select(c => c.ToString()).ToArray();
+        Array.Sort(score, (a, b) => b.CompareTo(a));
+        var dic = new Dictionary<int, string>();
 
+        for (int i = 0; i < score.Length; i++)
+        {
+            dic[score[i]] = i switch
+            {
+                0 => "Gold Medal",
+                1 => "Silver Medal",
+                2 => "Bronze Medal",
+                _ => (i + 1).ToString()
+            };
+        }
+
+        for (int i = 0; i < scores.Length; i++)
+        {
+            scores[i] = dic[(int.Parse(scores[i]))];
+        }
+
+        return scores;
+    }
+    // Faster and less memory usage
+    public static string[] FindRelativeRanks2(int[] score)
+    {
+        int len = score.Length;
+        var result = new string[len];
+        var sortedScores = new List<int>(score).ToArray();
+
+        Array.Sort(sortedScores, (a, b) => b.CompareTo(a));
+
+        var dic = new Dictionary<int, string>();
+
+        for (int i = 0; i < len; i++)
+        {
+            dic[sortedScores[i]] = i switch
+            {
+                0 => "Gold Medal",
+                1 => "Silver Medal",
+                2 => "Bronze Medal",
+                _ => (i + 1).ToString()
+            };
+        }
+
+        for (int i = 0; i < len; i++)
+        {
+            result[i] = dic[score[i]];
+        }
+
+        return result;
+    }
     #endregion
 
     #region SQL
