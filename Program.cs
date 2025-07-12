@@ -91,6 +91,7 @@ public class Solution
         var res67 = ToLowerCase("HeLLO");
         var res68 = IsOneBitCharacter(new int[] { 1, 1, 1, 0 });
         var res69 = SelfDividingNumbers(1, 22);
+        var res70 = FindErrorNums(new int[] { 1, 2, 2, 4 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2067,6 +2068,63 @@ public class Solution
         }
 
         return list;
+    }
+
+    public static int[] FindErrorNums(int[] nums)
+    {
+
+        var set = new HashSet<int>();
+        int duplicate = 0;
+
+        foreach (int i in nums)
+        {
+            if (!set.Contains(i))
+            {
+                set.Add(i);
+            }
+            else
+            {
+                duplicate = i;
+                break;
+            }
+        }
+
+        int actualSum = nums.Sum();
+        int expectedSum = nums.Length * (nums.Length + 1) / 2;
+
+        int missing = expectedSum + duplicate - actualSum;
+
+        return new int[] { duplicate, missing };
+    }
+    public static int[] FindErrorNums2(int[] nums)
+    {
+        int[] result = new int[2];
+        int[] array = new int[nums.Length + 1];
+        int duplicate = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            array[nums[i]]++;
+
+            // If the count of the number is greater than 1, it is a duplicate
+            if (array[nums[i]] > 1)
+            {
+                duplicate = nums[i];
+            }
+        }
+
+        result[0] = duplicate;
+
+        for (int i = 1; i < array.Length; i++)
+        {
+            if (array[i] == 0)
+            {
+                result[1] = i;
+
+                break;
+            }
+        }
+
+        return result;
     }
     #endregion
 
