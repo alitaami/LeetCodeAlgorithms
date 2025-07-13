@@ -92,6 +92,7 @@ public class Solution
         var res68 = IsOneBitCharacter(new int[] { 1, 1, 1, 0 });
         var res69 = SelfDividingNumbers(1, 22);
         var res70 = FindErrorNums(new int[] { 1, 2, 2, 4 });
+        var res71 = LetterCombinations("23");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2122,6 +2123,79 @@ public class Solution
 
                 break;
             }
+        }
+
+        return result;
+    }
+
+    public static IList<string> LetterCombinations(string digits)
+    {
+        if (string.IsNullOrEmpty(digits))
+            return new List<string>();
+
+        Dictionary<char, string> map = new Dictionary<char, string>
+        {
+            {'2', "abc"}, {'3', "def"}, {'4', "ghi"}, {'5', "jkl"},
+            {'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"}
+        };
+
+        var result = new List<string>();
+
+        if (digits.Length == 1)
+        {
+            foreach (char c in map[digits[0]])
+                result.Add($"{c}");
+        }
+        else if (digits.Length == 2)
+        {
+            foreach (char c1 in map[digits[0]])
+                foreach (char c2 in map[digits[1]])
+                    result.Add($"{c1}{c2}");
+        }
+        else if (digits.Length == 3)
+        {
+            foreach (char c1 in map[digits[0]])
+                foreach (char c2 in map[digits[1]])
+                    foreach (char c3 in map[digits[2]])
+                        result.Add($"{c1}{c2}{c3}");
+        }
+        else if (digits.Length == 4)
+        {
+            foreach (char c1 in map[digits[0]])
+                foreach (char c2 in map[digits[1]])
+                    foreach (char c3 in map[digits[2]])
+                        foreach (char c4 in map[digits[3]])
+                            result.Add($"{c1}{c2}{c3}{c4}");
+        }
+
+        return result;
+    }
+    public static IList<string> LetterCombinations2(string digits)
+    {
+        if (string.IsNullOrEmpty(digits))
+            return new List<string>();
+
+        Dictionary<char, string> map = new Dictionary<char, string>
+        {
+            {'2', "abc"}, {'3', "def"}, {'4', "ghi"}, {'5', "jkl"},
+            {'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"}
+        };
+
+        var result = new List<string>() { "" };
+
+        for (int i = 0; i < digits.Length; i++)
+        {
+            var temp = new List<string>();
+
+            foreach (string prefix in result)
+            {
+                foreach (char c in map[digits[i]])
+                {
+                    temp.Add(prefix + c);
+                }
+            }
+
+            result = temp;
         }
 
         return result;
