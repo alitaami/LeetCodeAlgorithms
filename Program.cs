@@ -381,7 +381,7 @@ public class Solution
 
         foreach (char c in s)
         {
-            if (c == '(' || c == '{' || c == '[')
+            if (c == '{' || c == '(' || c == '[')
             {
                 stack.Push(c);
             }
@@ -401,18 +401,23 @@ public class Solution
             }
             else if (c == ')')
             {
-                if (stack.Peek() != '(')
-                {
+                if (stack.Pop() != '(')
                     return false;
-                }
-
-                stack.Pop();
             }
         }
-
         return stack.Count() == 0;
     }
 
+    // Easy and Tricky :)
+    public bool IsValid2(string s)
+    {
+        while (s.Contains("()") || s.Contains("[]") || s.Contains("{}"))
+        {
+            s = s.Replace("()", "").Replace("[]", "").Replace("{}", "");
+        }
+
+        return s.Length == 0;
+    }
     public static int ReverseInteger(int x)
     {
         bool isNeagtive = x < 0;
