@@ -93,6 +93,7 @@ public class Solution
         var res69 = SelfDividingNumbers(1, 22);
         var res70 = FindErrorNums(new int[] { 1, 2, 2, 4 });
         var res71 = LetterCombinations("23");
+        var res72 = CountDigitOne(13);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -754,7 +755,7 @@ public class Solution
 
         return false;
     }
-    
+
     public static bool ContainsDuplicate2(int[] nums)
     {
         var set = new HashSet<int>(nums);
@@ -2212,6 +2213,20 @@ public class Solution
 
         return result;
     }
+
+    public static int CountDigitOne(int n)
+    {
+        int count = 0;
+        string temp = string.Empty;
+
+        for (int i = 1; i <= n; i++)
+        {
+            count += temp.Count(c => c == '1');
+        }
+
+        return count;
+    }
+
     #endregion
 
     #region SQL
