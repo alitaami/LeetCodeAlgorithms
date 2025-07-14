@@ -754,6 +754,13 @@ public class Solution
 
         return false;
     }
+    
+    public static bool ContainsDuplicate2(int[] nums)
+    {
+        var set = new HashSet<int>(nums);
+
+        return set.Count() != nums.Length;
+    }
 
     public static int[] Merge(int[] nums1, int m, int[] nums2, int n)
     {
