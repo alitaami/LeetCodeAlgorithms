@@ -95,6 +95,7 @@ public class Solution
         var res71 = LetterCombinations("23");
         var res72 = CountDigitOne(13);
         var res73 = CompareVersion("1.01", "1.001");
+        var res74 = RepeatedSubstringPattern("ab");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2246,6 +2247,15 @@ public class Solution
 
         return 0;
     }
+
+    public static bool RepeatedSubstringPattern(string s)
+    {
+        s = "abab";
+        string doubleS = s + s; // "abab" + "abab" = "abababab"
+        string trimmed = doubleS.Substring(1, doubleS.Length - 2); // "bababa"
+        return trimmed.Contains(s); // Check if original "abab" exists in "bababa"
+    }
+
     #endregion
 
     #region SQL
