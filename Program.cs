@@ -94,6 +94,7 @@ public class Solution
         var res70 = FindErrorNums(new int[] { 1, 2, 2, 4 });
         var res71 = LetterCombinations("23");
         var res72 = CountDigitOne(13);
+        var res73 = CompareVersion("1.01", "1.001");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2227,6 +2228,24 @@ public class Solution
         return count;
     }
 
+    public static int CompareVersion(string version1, string version2)
+    {
+        var parts1 = version1.Split('.');
+        var parts2 = version2.Split('.');
+
+        int length = Math.Max(parts1.Length, parts2.Length);
+
+        for (int i = 0; i < length; i++)
+        {
+            int v1 = i < parts1.Length ? int.Parse(parts1[i]) : 0;
+            int v2 = i < parts2.Length ? int.Parse(parts2[i]) : 0;
+
+            if (v1 < v2) return -1;
+            if (v1 > v2) return 1;
+        }
+
+        return 0;
+    }
     #endregion
 
     #region SQL
