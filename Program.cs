@@ -613,7 +613,7 @@ public class Solution
     public static bool WordPattern2(string pattern, string s)
     {
         var ss = s.Trim().Split(" ");
-       
+
         if (pattern.Length != ss.Length)
             return false;
 
@@ -2374,7 +2374,7 @@ public class Solution
     {
         if (S.Length != T.Length) return false;
 
-        var map = new Dictionary<char, char>(); 
+        var map = new Dictionary<char, char>();
 
         char s;
         char t;
@@ -2404,6 +2404,44 @@ public class Solution
         return true;
     }
 
+    public static IEnumerable<int> FindDisappearedNumbers(int[] nums)
+    {
+        var bitArray = new BitArray(nums.Length + 1); // index 0 unused
+        var res = new List<int>();
+        nums = nums.Distinct().ToArray();
+
+        foreach (int num in nums)
+        {
+            bitArray[num] = true;
+        }
+
+        for (int i = 1; i <= nums.Length; i++)
+        {
+            if (!bitArray[i])
+                res.Add(i);
+        } 
+
+        return res;
+    }
+
+    public static IList<int> FindDisappearedNumbers2(int[] nums)
+    {
+        return Enumerable.Range(1, nums.Length).Except(nums).ToList();
+    }
+
+    public static IList<int> FindDisappearedNumbers3(int[] nums)
+    {
+        var set = new HashSet<int>(nums);
+        var res = new List<int>();
+
+        for (int i = 1; i <= nums.Length; i++)
+        {
+            if (!set.Contains(i))
+                res.Add(i);
+        }
+
+        return res;
+    }
 
     #endregion
 
