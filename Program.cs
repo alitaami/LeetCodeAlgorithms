@@ -98,6 +98,7 @@ public class Solution
         var res74 = RepeatedSubstringPattern("ab");
         var res75 = CheckRecord("PPALLP");
         var res76 = IsIsomorphic("egg", "add");
+        var res77 = FindDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -579,7 +580,6 @@ public class Solution
 
         return (int)division;
     }
-
     public static bool WordPattern(string pattern, string s)
     {
         var ss = s.Trim().Split(' ');
@@ -2369,6 +2369,42 @@ public class Solution
 
         return true;
     }
+
+    public static bool IsIsomorphic3(string S, string T)
+    {
+        if (S.Length != T.Length) return false;
+
+        var map = new Dictionary<char, char>(); 
+
+        char s;
+        char t;
+
+        for (int i = 0; i < S.Length; i++)
+        {
+            s = S[i];
+            t = T[i];
+
+            if (map.ContainsKey(s))
+            {
+                if (map[s] != t)
+                    return false;
+            }
+            else
+            {
+                if (map.ContainsValue(t))
+                {
+                    if (map[t] != s)
+                        return false;
+                }
+
+                map[s] = t;
+            }
+        }
+
+        return true;
+    }
+
+
     #endregion
 
     #region SQL
