@@ -2321,14 +2321,17 @@ public class Solution
                 if (mapS[s] != t)
                     return false;
             }
-            else if (mapT.ContainsKey(t))
+            else
             {
-                if (mapT[t] != s)
-                    return false;
-            }
+                if (mapT.ContainsKey(t))
+                {
+                    if (mapT[t] != s)
+                        return false;
+                }
 
-            mapT[t] = s;
-            mapS[s] = t;
+                mapT[t] = s;
+                mapS[s] = t;
+            }
         }
 
         return true;
