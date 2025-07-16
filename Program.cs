@@ -96,6 +96,7 @@ public class Solution
         var res72 = CountDigitOne(13);
         var res73 = CompareVersion("1.01", "1.001");
         var res74 = RepeatedSubstringPattern("ab");
+        var res75 = CheckRecord("PPALLP");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2250,12 +2251,33 @@ public class Solution
 
     public static bool RepeatedSubstringPattern(string s)
     {
-        s = "abab";
         string doubleS = s + s; // "abab" + "abab" = "abababab"
         string trimmed = doubleS.Substring(1, doubleS.Length - 2); // "bababa"
         return trimmed.Contains(s); // Check if original "abab" exists in "bababa"
     }
 
+    public static bool CheckRecord(string s)
+    {
+        int temp = 0, late = 0, absent = 0;
+
+        foreach (var c in s)
+        {
+            if (c == 'L')
+            {
+                temp++;
+                late = Math.Max(late, temp);
+            }
+            else
+            {
+                temp = 0;
+
+                if (c == 'A')
+                    absent++;
+            }
+        }
+
+        return late < 3 && absent < 2;
+    }
     #endregion
 
     #region SQL
