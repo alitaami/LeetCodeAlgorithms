@@ -2408,7 +2408,6 @@ public class Solution
     {
         var bitArray = new BitArray(nums.Length + 1); // index 0 unused
         var res = new List<int>();
-        nums = nums;
 
         foreach (int num in nums)
         {
