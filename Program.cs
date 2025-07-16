@@ -99,6 +99,7 @@ public class Solution
         var res75 = CheckRecord("PPALLP");
         var res76 = IsIsomorphic("egg", "add");
         var res77 = FindDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
+        var res78 = IsHappy(19);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2418,7 +2419,7 @@ public class Solution
         {
             if (!bitArray[i])
                 res.Add(i);
-        } 
+        }
 
         return res;
     }
@@ -2440,6 +2441,58 @@ public class Solution
         }
 
         return res;
+    }
+
+    public static bool IsHappy(int n)
+    {
+        var list = new List<int>();
+        int sum = 0;
+
+        while (sum != 1)
+        {
+            sum = 0;
+
+            while (n > 0)
+            {
+                sum += (n % 10) * (n % 10);
+
+                n /= 10;
+            }
+
+            n = sum;
+
+            if (list.Contains(sum))
+                return false;
+            else
+                list.Add(sum);
+        }
+
+        return true;
+    }
+
+    public static bool IsHappy2(int n)
+    {
+        var seen = new HashSet<int>();
+
+        while (n != 1 && !seen.Contains(n))
+        {
+            seen.Add(n);
+            n = GetSumOfSquares(n);
+        }
+
+        return n == 1;
+    }
+
+    private static int GetSumOfSquares(int n)
+    {
+        int sum = 0;
+        while (n > 0)
+        {
+            int digit = n % 10;
+            sum += digit * digit;
+            n /= 10;
+        }
+        return sum;
     }
 
     #endregion
