@@ -610,6 +610,39 @@ public class Solution
         return true;
     }
 
+    public static bool WordPattern2(string pattern, string s)
+    {
+        var ss = s.Trim().Split(" ");
+       
+        if (pattern.Length != ss.Length)
+            return false;
+
+        var map = new Dictionary<char, string>();
+        char P;
+        string S = string.Empty;
+
+        for (int i = 0; i < pattern.Length; i++)
+        {
+            P = pattern[i];
+            S = ss[i];
+
+            if (map.ContainsKey(P))
+            {
+                if (map[P] != S)
+                    return false;
+            }
+            else
+            {
+                if (map.ContainsValue(S))
+                    return false;
+
+                map[P] = S;
+            }
+        }
+
+        return true;
+    }
+
     public static void ReverseString(char[] s)
     {
         int left = 0;
@@ -2336,7 +2369,6 @@ public class Solution
 
         return true;
     }
-
     #endregion
 
     #region SQL
