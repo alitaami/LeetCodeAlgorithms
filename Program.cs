@@ -97,6 +97,7 @@ public class Solution
         var res73 = CompareVersion("1.01", "1.001");
         var res74 = RepeatedSubstringPattern("ab");
         var res75 = CheckRecord("PPALLP");
+        var res76 = IsIsomorphic("egg", "add");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2278,6 +2279,61 @@ public class Solution
 
         return late < 3 && absent < 2;
     }
+
+    public static bool IsIsomorphic(string s, string t)
+    {
+        return GetPattern(s) == GetPattern(t);
+
+        string GetPattern(string word)
+        {
+            var dic = new Dictionary<char, int>();
+            StringBuilder pattern = new StringBuilder();
+            int index = 0;
+
+            foreach (var w in word)
+            {
+                if (!dic.ContainsKey(w))
+                    dic[w] = index++;
+
+                pattern.Append(dic[w] + ',');
+            }
+
+            return pattern.ToString();
+        }
+    }
+    public static bool IsIsomorphic2(string S, string T)
+    {
+        if (S.Length != T.Length) return false;
+
+        var mapS = new Dictionary<char, char>();
+        var mapT = new Dictionary<char, char>();
+
+        char s;
+        char t;
+
+        for (int i = 0; i < S.Length; i++)
+        {
+            s = S[i];
+            t = T[i];
+
+            if (mapS.ContainsKey(s))
+            {
+                if (mapS[s] != t)
+                    return false;
+            }
+            else if (mapT.ContainsKey(t))
+            {
+                if (mapT[t] != s)
+                    return false;
+            }
+
+            mapT[t] = s;
+            mapS[s] = t;
+        }
+
+        return true;
+    }
+
     #endregion
 
     #region SQL
