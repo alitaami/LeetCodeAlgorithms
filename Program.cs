@@ -101,6 +101,7 @@ public class Solution
         var res77 = FindDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
         var res78 = IsHappy(19);
         var res79 = ReplaceWords(new string[] { "cat", "bat", "rat" }, "the cattle was rattled by the battery\"\r\nOutput: \"the cat was rat by the bat");
+        var res80 = PowerfulIntegers(2, 3, 10);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2524,6 +2525,32 @@ public class Solution
 
         return string.Join(" ", res);
     }
+
+    public static IList<int> PowerfulIntegers(int x, int y, int bound)
+    {
+        var result = new HashSet<int>();
+        int sum = 0;
+
+        for (int i = 0; Math.Pow(x, i) <= bound; i++)
+        {
+            for (int j = 0; Math.Pow(y, j) <= bound; j++)
+            {
+                sum = (int)(Math.Pow(x, i) + Math.Pow(y, j));
+
+                if(sum <= bound)
+                    result.Add(sum);
+
+                if (y == 1)
+                    break;
+            }
+
+            if (x == 1)
+                break;
+        }
+
+        return result.ToList();
+    }
+
     #endregion
 
     #region SQL
