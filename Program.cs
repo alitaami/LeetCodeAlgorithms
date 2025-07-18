@@ -100,6 +100,7 @@ public class Solution
         var res76 = IsIsomorphic("egg", "add");
         var res77 = FindDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
         var res78 = IsHappy(19);
+        var res79 = ReplaceWords(new string[] { "cat", "bat", "rat" }, "the cattle was rattled by the battery\"\r\nOutput: \"the cat was rat by the bat");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2495,6 +2496,34 @@ public class Solution
         return sum;
     }
 
+    public static string ReplaceWords(IList<string> dictionary, string sentence)
+    {
+        var set = new HashSet<string>(dictionary);
+        var res = new List<string>();
+        var words = sentence.Split(' ');
+        string replacement = string.Empty;
+        string prefix = string.Empty;
+
+        foreach (var word in words)
+        {
+            replacement = word;
+
+            for (int i = 1; i < word.Length; i++)
+            {
+                prefix = word.Substring(0, i);
+
+                if (set.Contains(prefix))
+                {
+                    replacement = prefix;
+                    break;
+                }
+            }
+
+            res.Add(replacement);
+        }
+
+        return string.Join(" ", res);
+    }
     #endregion
 
     #region SQL
