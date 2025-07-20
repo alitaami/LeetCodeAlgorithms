@@ -2537,7 +2537,7 @@ public class Solution
             {
                 sum = (int)(Math.Pow(x, i) + Math.Pow(y, j));
 
-                if(sum <= bound)
+                if (sum <= bound)
                     result.Add(sum);
 
                 if (y == 1)
@@ -2550,6 +2550,38 @@ public class Solution
 
         return result.ToList();
     }
+
+    #region Print in Order
+    public class Foo
+    {
+        TaskCompletionSource<bool> firstTaskDone = new TaskCompletionSource<bool>();
+        TaskCompletionSource<bool> secondTaskDone = new TaskCompletionSource<bool>();
+
+        public Foo()
+        {
+
+        }
+
+        public void First(Action printFirst)
+        {
+            printFirst();
+            firstTaskDone.SetResult(true);
+        }
+
+        public void Second(Action printSecond)
+        {
+            firstTaskDone.Task.Wait();
+            printSecond();
+            secondTaskDone.SetResult(true);
+        }
+
+        public void Third(Action printThird)
+        {
+            secondTaskDone.Task.Wait();
+            printThird();
+        }
+    }
+    #endregion
 
     #endregion
 
