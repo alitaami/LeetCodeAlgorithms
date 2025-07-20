@@ -102,6 +102,7 @@ public class Solution
         var res78 = IsHappy(19);
         var res79 = ReplaceWords(new string[] { "cat", "bat", "rat" }, "the cattle was rattled by the battery\"\r\nOutput: \"the cat was rat by the bat");
         var res80 = PowerfulIntegers(2, 3, 10);
+        var res81 = MajorityElement(new int[] { 3, 2, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2551,6 +2552,36 @@ public class Solution
         return result.ToList();
     }
 
+    public static int MajorityElement(int[] nums)
+    {
+        int n = nums.Length / 2;
+        var dic = new Dictionary<int, int>();
+
+        foreach (int num in nums)
+        {
+            if (dic.ContainsKey(num))
+            {
+                dic[num]++;
+                if (dic[num] > n)
+                    return num;
+            }
+            else
+                dic[num] = 1;
+        }
+
+        return nums.SingleOrDefault();
+    }
+
+    public static int MajorityElement2(int[] nums)
+    {
+        int n = nums.Length / 2;
+
+        return nums.GroupBy(c => c)
+                   .Select(g => new { Key = g.Key, Count = g.Count() })
+                   .Where(c => c.Count > n)
+                   .Select(c => c.Key)
+                   .FirstOrDefault();
+    }
     #region Print in Order
     public class Foo
     {
