@@ -103,6 +103,7 @@ public class Solution
         var res79 = ReplaceWords(new string[] { "cat", "bat", "rat" }, "the cattle was rattled by the battery\"\r\nOutput: \"the cat was rat by the bat");
         var res80 = PowerfulIntegers(2, 3, 10);
         var res81 = MajorityElement(new int[] { 3, 2, 3 });
+        var res82 = FindWords(new string[] { "Hello", "Alaska", "Dad", "Peace" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2582,6 +2583,42 @@ public class Solution
                    .Select(c => c.Key)
                    .FirstOrDefault();
     }
+
+    public static string[] FindWords(string[] words)
+    {
+        HashSet<char> row1 = new HashSet<char>("qwertyuiopQWERTYUIOP");
+        HashSet<char> row2 = new HashSet<char>("asdfghjklASDFGHJKL");
+        HashSet<char> row3 = new HashSet<char>("zxcvbnmZXCVBNM");
+
+        int x = 0;
+        int y = 0;
+        int z = 0;
+
+        List<string> result = new List<string>();
+
+        foreach (var word in words)
+        {
+            x = 0;
+            y = 0;
+            z = 0;
+
+            foreach (var w in word)
+            {
+                if (row1.Contains(w))
+                    x = 1;
+                else if (row2.Contains(w))
+                    y = 1;
+                else if (row3.Contains(w))
+                    z = 1;
+            }
+
+            if (x + y + z == 1)
+                result.Add(word);
+        }
+
+        return result.ToArray();
+    }
+
     #region Print in Order
     public class Foo
     {
