@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 public class Solution
@@ -104,6 +105,7 @@ public class Solution
         var res80 = PowerfulIntegers(2, 3, 10);
         var res81 = MajorityElement(new int[] { 3, 2, 3 });
         var res82 = FindWords(new string[] { "Hello", "Alaska", "Dad", "Peace" });
+        var res83 = MostCommonWord("Bob. hIt, baLl", new string[] { "hit", "bob" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2651,6 +2653,26 @@ public class Solution
     }
     #endregion
 
+    public static string MostCommonWord(string paragraph, string[] banned)
+    {
+        var bannedSet = new HashSet<string>(banned);
+        var cleaned = Regex.Replace(paragraph.ToLower(), "[^a-z]", " ");
+        var words = cleaned.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        var dic = new Dictionary<string, int>();
+
+        foreach (var word in words)
+        {
+            if (!bannedSet.Contains(word))
+            {
+                if (dic.ContainsKey(word))
+                    dic[word]++;
+                else
+                    dic[word] = 1;
+            }
+        }
+        return dic.MaxBy(kvp => kvp.Value).Key;
+    }
     #endregion
 
     #region SQL
