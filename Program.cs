@@ -106,6 +106,7 @@ public class Solution
         var res81 = MajorityElement(new int[] { 3, 2, 3 });
         var res82 = FindWords(new string[] { "Hello", "Alaska", "Dad", "Peace" });
         var res83 = MostCommonWord("Bob. hIt, baLl", new string[] { "hit", "bob" });
+        var res84 = MajorityElement_medium(new int[] { 3, 2, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2586,6 +2587,44 @@ public class Solution
                    .FirstOrDefault();
     }
 
+    public static IList<int> MajorityElement_medium(int[] nums)
+    {
+        int n = nums.Length / 3;
+
+        return nums.GroupBy(c => c)
+                   .Select(g => new { Key = g.Key, Count = g.Count() })
+                   .Where(c => c.Count > n)
+                   .Select(c => c.Key)
+                   .ToList();
+    }
+
+    public static IList<int> MajorityElement_medium2(int[] nums)
+    {
+        Dictionary<int, int> dict = new Dictionary<int, int>();
+        foreach (int i in nums)
+        {
+            if (dict.ContainsKey(i))
+            {
+                dict[i]++;
+            }
+            else
+            {
+                dict[i] = 1;
+            }
+        }
+
+        List<int> res = new List<int>();
+        int compare = nums.Length / 3;
+        foreach (var pair in dict)
+        {
+            if (pair.Value > compare)
+            {
+                res.Add(pair.Key);
+            }
+        }
+
+        return res;
+    }
     public static string[] FindWords(string[] words)
     {
         HashSet<char> row1 = new HashSet<char>("qwertyuiopQWERTYUIOP");
