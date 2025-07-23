@@ -108,6 +108,7 @@ public class Solution
         var res83 = MostCommonWord("Bob. hIt, baLl", new string[] { "hit", "bob" });
         var res84 = MajorityElement_medium(new int[] { 3, 2, 3 });
         var res85 = CanConstruct("aab", "baa");
+        var res86 = CountWords(new string[] { "leetcode", "is", "amazing", "as", "is" }, new string[] { "amazing", "leetcode", "is" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2824,6 +2825,58 @@ public class Solution
     }
     #endregion
 
+    public static int CountWords(string[] words1, string[] words2)
+    {
+        var dic1 = new Dictionary<string, int>();
+        var dic2 = new Dictionary<string, int>();
+        int count = 0;
+
+        foreach (var w in words1)
+        {
+            if (dic1.ContainsKey(w))
+                dic1[w]++;
+            else
+                dic1[w] = 1;
+        }
+
+        foreach (var w in words2)
+        {
+            if (dic2.ContainsKey(w))
+                dic2[w]++;
+            else
+                dic2[w] = 1;
+        }
+
+        foreach (var pair in dic1)
+        {
+            if (pair.Value == 1 && dic2.ContainsKey(pair.Key) && dic2[pair.Key] == 1)
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    // efficient and memory less
+    public static int CountWords2(string[] words1, string[] words2)
+    {
+        var dict = new Dictionary<string, int>();
+
+        foreach (var w in words1)
+        {
+            if (dict.ContainsKey(w))
+                dict[w]++;
+            else
+                dict[w] = 1;
+        }
+
+        foreach (var s in words2)
+            if (dict.ContainsKey(s) && dict[s] <= 1)
+                dict[s]--;
+
+        return dict.Count(p => p.Value == 0);
+    }
     #endregion
 
     #region SQL
