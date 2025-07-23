@@ -2749,6 +2749,55 @@ public class Solution
         }
         return true;
     }
+
+    public class ParkingSystem
+    {
+        int small = 0, medium = 0, big = 0;
+
+        public ParkingSystem(int big, int medium, int small)
+        {
+            this.big = big;
+            this.medium = medium;
+            this.small = small;
+        }
+
+        public bool AddCar(int carType)
+        {
+            switch (carType)
+            {
+                case (int)ParkType.big:
+                    if (big > 0)
+                    {
+                        big--;
+                        return true;
+                    }
+                    break;
+
+                case (int)ParkType.medium:
+                    if (medium > 0)
+                    {
+                        medium--;
+                        return true;
+                    }
+                    break;
+
+                case (int)ParkType.small:
+                    if (small > 0)
+                    {
+                        small--;
+                        return true;
+                    }
+                    break;
+            }
+            return false;
+        }
+        public enum ParkType
+        {
+            big = 1,
+            medium = 2,
+            small = 3
+        }
+    }
     #endregion
 
     #region SQL
