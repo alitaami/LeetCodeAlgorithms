@@ -107,6 +107,7 @@ public class Solution
         var res82 = FindWords(new string[] { "Hello", "Alaska", "Dad", "Peace" });
         var res83 = MostCommonWord("Bob. hIt, baLl", new string[] { "hit", "bob" });
         var res84 = MajorityElement_medium(new int[] { 3, 2, 3 });
+        var res85 = CanConstruct("aab", "baa");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2625,6 +2626,7 @@ public class Solution
 
         return res;
     }
+
     public static string[] FindWords(string[] words)
     {
         HashSet<char> row1 = new HashSet<char>("qwertyuiopQWERTYUIOP");
@@ -2725,6 +2727,27 @@ public class Solution
          .GroupBy(word => word)
          .ExceptBy(banned, gr => gr.Key)
          .MaxBy(gr => gr.Count()).Key;
+    }
+
+    public static bool CanConstruct(string ransomNote, string magazine)
+    {
+        Dictionary<char, int> letters = new Dictionary<char, int>();
+        foreach (char letter in magazine)
+        {
+            if (letters.ContainsKey(letter))
+                letters[letter]++;
+            else
+                letters[letter] = 1;
+        }
+
+        foreach (char c in ransomNote)
+        {
+            if (letters.ContainsKey(c) && letters[c] > 0)
+                letters[c]--;
+            else
+                return false;
+        }
+        return true;
     }
     #endregion
 
