@@ -2750,6 +2750,7 @@ public class Solution
         return true;
     }
 
+    #region ParkingSystem
     public class ParkingSystem
     {
         int small = 0, medium = 0, big = 0;
@@ -2798,6 +2799,31 @@ public class Solution
             small = 3
         }
     }
+
+    public class ParkingSystem2
+    {
+        int[] slots = new int[4];
+        public ParkingSystem2(int big, int medium, int small)
+        {
+            slots[0] = 0;
+            slots[1] = big;
+            slots[2] = medium;
+            slots[3] = small;
+
+        }
+
+        public bool AddCar(int carType)
+        {
+            if (slots[carType] > 0)
+            {
+                slots[carType]--;
+                return true;
+            }
+            return false;
+        }
+    }
+    #endregion
+
     #endregion
 
     #region SQL
