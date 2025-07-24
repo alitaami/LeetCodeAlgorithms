@@ -109,6 +109,7 @@ public class Solution
         var res84 = MajorityElement_medium(new int[] { 3, 2, 3 });
         var res85 = CanConstruct("aab", "baa");
         var res86 = CountWords(new string[] { "leetcode", "is", "amazing", "as", "is" }, new string[] { "amazing", "leetcode", "is" });
+        var res87 = KthDistinct(new string[] { "d", "b", "c", "b", "c", "a" }, 2);
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2877,6 +2878,48 @@ public class Solution
 
         return dict.Count(p => p.Value == 0);
     }
+
+    public static string KthDistinct(string[] arr, int k)
+    {
+        var dic = new Dictionary<string, int>();
+
+        foreach (var w in arr)
+        {
+            if (dic.ContainsKey(w))
+                dic[w]++;
+            else
+                dic[w] = 1;
+        }
+
+        return dic.Where(c => c.Value == 1).Skip(k - 1).FirstOrDefault().Key ?? "";
+    }
+    
+    public static string KthDistinct2(string[] arr, int k)
+    {
+        var dic = new Dictionary<string, int>();
+
+        foreach (var w in arr)
+        {
+            if (dic.ContainsKey(w))
+                dic[w]++;
+            else
+                dic[w] = 1;
+        }
+       
+        int counter = 0;
+        foreach (var word in dic)
+        {
+            if (word.Value == 1)
+            {
+                counter++;
+                if (counter == k)
+                    return word.Key;
+            }
+        }
+
+        return "";
+    }
+
     #endregion
 
     #region SQL
