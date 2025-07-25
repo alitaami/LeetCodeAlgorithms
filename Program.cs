@@ -111,6 +111,7 @@ public class Solution
         var res86 = CountWords(new string[] { "leetcode", "is", "amazing", "as", "is" }, new string[] { "amazing", "leetcode", "is" });
         var res87 = KthDistinct(new string[] { "d", "b", "c", "b", "c", "a" }, 2);
         var res88 = RepeatedCharacter("abccbaacz");
+        var res89 = CheckPrimeFrequency(new int[] { 3, 0, 3, 6, 3, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2937,7 +2938,45 @@ public class Solution
                 dic[c] = 1;
         }
 
-        return ' '; 
+        return ' ';
+    }
+
+    public static bool CheckPrimeFrequency(int[] nums)
+    {
+        var dic = new Dictionary<int, int>();
+        int counter = 0;
+
+        foreach (var num in nums)
+        {
+            if (dic.ContainsKey(num))
+                dic[num]++;
+            else
+                dic[num] = 1;
+        }
+
+        return dic.Any(d => IsPrime(d.Value));
+
+        bool IsPrime(int n)
+        {
+            counter = 0;
+
+            if (n is 1)
+                return false;
+            else if (n is 2)
+                return true;
+            else if (n % 2 == 0)
+                return false;
+            else
+            {
+                for (int i = 1; i <= n; i += 2)
+                {
+                    if (n % i == 0)
+                        counter++;
+                }
+
+                return counter == 2;
+            }
+        }
     }
     #endregion
 
