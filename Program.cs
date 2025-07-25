@@ -110,6 +110,7 @@ public class Solution
         var res85 = CanConstruct("aab", "baa");
         var res86 = CountWords(new string[] { "leetcode", "is", "amazing", "as", "is" }, new string[] { "amazing", "leetcode", "is" });
         var res87 = KthDistinct(new string[] { "d", "b", "c", "b", "c", "a" }, 2);
+        var res88 = RepeatedCharacter("abccbaacz");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2893,7 +2894,7 @@ public class Solution
 
         return dic.Where(c => c.Value == 1).Skip(k - 1).FirstOrDefault().Key ?? "";
     }
-    
+
     public static string KthDistinct2(string[] arr, int k)
     {
         var dic = new Dictionary<string, int>();
@@ -2905,7 +2906,7 @@ public class Solution
             else
                 dic[w] = 1;
         }
-       
+
         int counter = 0;
         foreach (var word in dic)
         {
@@ -2920,6 +2921,24 @@ public class Solution
         return "";
     }
 
+    public static char RepeatedCharacter(string s)
+    {
+        var dic = new Dictionary<char, int>();
+        foreach (char c in s)
+        {
+            if (dic.ContainsKey(c))
+            {
+                if (dic[c] + 1 == 2)
+                    return c;
+
+                dic[c]++;
+            }
+            else
+                dic[c] = 1;
+        }
+
+        return ' '; 
+    }
     #endregion
 
     #region SQL
