@@ -112,6 +112,7 @@ public class Solution
         var res87 = KthDistinct(new string[] { "d", "b", "c", "b", "c", "a" }, 2);
         var res88 = RepeatedCharacter("abccbaacz");
         var res89 = CheckPrimeFrequency(new int[] { 3, 0, 3, 6, 3, 3 });
+        var res90 = Intersection(new int[] { 3, 0, 3, 6, 3, 3 }, new int[] { 3, 0, 3, 6, 3, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2977,6 +2978,43 @@ public class Solution
                 return counter == 2;
             }
         }
+    }
+
+    public static int[] Intersection(int[] nums1, int[] nums2)
+    {
+        var dic = new Dictionary<int, int>();
+
+        foreach (var num1 in nums1)
+        {
+            if (dic.ContainsKey(num1))
+                continue;
+            else
+                dic[num1] = 1;
+        }
+
+        foreach (var num2 in nums2)
+        {
+            if (dic.ContainsKey(num2))
+                dic[num2]++;
+            else
+                continue;
+        }
+
+        return dic.Where(c => c.Value > 1).Select(c => c.Key).ToArray();
+    }
+    
+    public static int[] Intersection2(int[] nums1, int[] nums2)
+    {
+        var set1 = new HashSet<int>(nums1);
+        var result = new HashSet<int>();
+
+        foreach (var num in nums2)
+        {
+            if (set1.Contains(num))
+                result.Add(num);
+        }
+
+        return result.ToArray();
     }
     #endregion
 
