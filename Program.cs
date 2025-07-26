@@ -113,6 +113,7 @@ public class Solution
         var res88 = RepeatedCharacter("abccbaacz");
         var res89 = CheckPrimeFrequency(new int[] { 3, 0, 3, 6, 3, 3 });
         var res90 = Intersection(new int[] { 3, 0, 3, 6, 3, 3 }, new int[] { 3, 0, 3, 6, 3, 3 });
+        var res91 = UniqueOccurrences(new int[] { 3, 0, 3, 6, 3, 3 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3002,7 +3003,7 @@ public class Solution
 
         return dic.Where(c => c.Value > 1).Select(c => c.Key).ToArray();
     }
-    
+
     public static int[] Intersection2(int[] nums1, int[] nums2)
     {
         var set1 = new HashSet<int>(nums1);
@@ -3015,6 +3016,38 @@ public class Solution
         }
 
         return result.ToArray();
+    }
+
+    public static bool UniqueOccurrences(int[] arr)
+    {
+        var dic = new Dictionary<int, int>();
+
+        foreach (var num in arr)
+        {
+            if (dic.ContainsKey(num))
+                dic[num]++;
+            else
+                dic[num] = 1;
+        }
+
+        return dic.GroupBy(c => c.Value).Select(cc => cc.Count()).All(s => s <= 1);
+    }
+
+    public static bool UniqueOccurrences2(int[] arr)
+    {
+        var dic = new Dictionary<int, int>();
+
+        foreach (var num in arr)
+        {
+            if (dic.ContainsKey(num))
+                dic[num]++;
+            else
+                dic[num] = 1;
+        }
+
+        var set = new HashSet<int>(dic.Values);
+
+        return dic.Count() != set.Count();
     }
     #endregion
 
