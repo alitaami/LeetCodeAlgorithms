@@ -114,6 +114,7 @@ public class Solution
         var res89 = CheckPrimeFrequency(new int[] { 3, 0, 3, 6, 3, 3 });
         var res90 = Intersection(new int[] { 3, 0, 3, 6, 3, 3 }, new int[] { 3, 0, 3, 6, 3, 3 });
         var res91 = UniqueOccurrences(new int[] { 3, 0, 3, 6, 3, 3 });
+        var res92 = CountHillValley(new int[] { 6, 6, 5, 5, 4, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3048,6 +3049,34 @@ public class Solution
         var set = new HashSet<int>(dic.Values);
 
         return dic.Count() != set.Count();
+    }
+
+    public static int CountHillValley(int[] nums)
+    {
+        // Remove consecutive duplicates
+        List<int> values = new List<int>();
+        int counter = 0;
+
+        values.Add(nums[0]);
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            if (nums[i] != nums[i - 1])
+            {
+                values.Add(nums[i]);
+            }
+        }
+
+        for (int i = 1; i < values.Count - 1; i++)
+        {
+            if ((values[i] > values[i - 1] && values[i] > values[i + 1]) ||
+                (values[i] < values[i - 1] && values[i] < values[i + 1]))
+            {
+                counter++;
+            }
+        }
+
+        return counter;
     }
     #endregion
 
