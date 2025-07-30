@@ -3121,6 +3121,14 @@ public class Solution
             .Select(list => (IList<string>)list)
             .ToList();
     }
+    
+    public static IList<IList<string>> GroupAnagrams2(string[] strs)
+    {
+        return strs
+            .GroupBy(s => new string(s.OrderBy(c => c).ToArray()))
+            .Select(g => g.ToList() as IList<string>)
+            .ToList();
+    }
 
     #endregion
 
