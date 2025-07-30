@@ -115,6 +115,7 @@ public class Solution
         var res90 = Intersection(new int[] { 3, 0, 3, 6, 3, 3 }, new int[] { 3, 0, 3, 6, 3, 3 });
         var res91 = UniqueOccurrences(new int[] { 3, 0, 3, 6, 3, 3 });
         var res92 = CountHillValley(new int[] { 2, 4, 1, 1, 6, 5 });
+        var res93 = GroupAnagrams(new string[] { "eat", "tea", "tan", "ate", "nat", "bat" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3097,6 +3098,28 @@ public class Solution
         }
 
         return count;
+    }
+
+    public static IList<IList<string>> GroupAnagrams(string[] strs)
+    {
+        var dic = new Dictionary<string, List<string>>();
+        string temp = string.Empty;
+
+        foreach (var str in strs)
+        {
+            var array = str.ToCharArray();
+            Array.Sort(array);
+            temp = new string(array);
+
+            if (dic.ContainsKey(temp))
+                dic[temp].Add(str);
+            else
+                dic[temp] = new List<string>() { str };
+        }
+
+        return dic.Values
+            .Select(list => (IList<string>)list)
+            .ToList();
     }
 
     #endregion
