@@ -116,6 +116,7 @@ public class Solution
         var res91 = UniqueOccurrences(new int[] { 3, 0, 3, 6, 3, 3 });
         var res92 = CountHillValley(new int[] { 2, 4, 1, 1, 6, 5 });
         var res93 = GroupAnagrams(new string[] { "eat", "tea", "tan", "ate", "nat", "bat" });
+        var res94 = RomanToInt("III");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3121,13 +3122,81 @@ public class Solution
             .Select(list => (IList<string>)list)
             .ToList();
     }
-    
+
     public static IList<IList<string>> GroupAnagrams2(string[] strs)
     {
         return strs
             .GroupBy(s => new string(s.OrderBy(c => c).ToArray()))
             .Select(g => g.ToList() as IList<string>)
             .ToList();
+    }
+
+    public static int RomanToInt(string s)
+    {
+        var dic = new Dictionary<char, int>()
+        {
+            { 'I', 1 },
+            { 'V', 5 },
+            { 'X', 10 },
+            { 'L', 50 },
+            { 'C', 100 },
+            { 'D', 500 },
+            { 'M', 1000 }
+        };
+
+        int result = 0;
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            int currentVal = dic[s[i]];
+
+            if (i + 1 < s.Length && dic[s[i]] < dic[s[i + 1]])
+            {
+                result -= currentVal;
+            }
+            else
+            {
+                result += currentVal;
+            }
+        }
+
+        return result;
+    }
+
+    public static int RomanToInt2(string s)
+    {
+        var dic = new Dictionary<char, int>()
+    {
+        { 'I', 1 },
+        { 'V', 5 },
+        { 'X', 10 },
+        { 'L', 50 },
+        { 'C', 100 },
+        { 'D', 500 },
+        { 'M', 1000 }
+    };
+
+        int result = 0;
+
+        for (int i = 0; i < s.Length - 1; i++)
+        {
+            int currentVal = dic[s[i]];
+            int nextVal = dic[s[i + 1]];
+
+            if (currentVal < nextVal)
+            {
+                result -= currentVal;
+            }
+            else
+            {
+                result += currentVal;
+            }
+        }
+
+        // Add the last character's value which wasn't included in the loop
+        result += dic[s[^1]];
+
+        return result;
     }
 
     #endregion
