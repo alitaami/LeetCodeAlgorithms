@@ -117,6 +117,7 @@ public class Solution
         var res92 = CountHillValley(new int[] { 2, 4, 1, 1, 6, 5 });
         var res93 = GroupAnagrams(new string[] { "eat", "tea", "tan", "ate", "nat", "bat" });
         var res94 = RomanToInt("III");
+        var res95 = MaximumGap(new int[] { 3, 6, 9, 1 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3197,6 +3198,19 @@ public class Solution
         result += dic[s[^1]];
 
         return result;
+    }
+
+    public static int MaximumGap(int[] nums)
+    {
+        int maxGap = 0;
+        Array.Sort(nums);
+
+        for (int i = 0; i < nums.Length - 1; i++)
+        {
+            maxGap = Math.Max(maxGap, Math.Abs(nums[i] - nums[i + 1]));
+        }
+
+        return maxGap;
     }
 
     #endregion
