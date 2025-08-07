@@ -118,6 +118,7 @@ public class Solution
         var res93 = GroupAnagrams(new string[] { "eat", "tea", "tan", "ate", "nat", "bat" });
         var res94 = RomanToInt("III");
         var res95 = MaximumGap(new int[] { 3, 6, 9, 1 });
+        var res96 = Rob(new int[] { 2, 1, 1, 2 });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3211,6 +3212,21 @@ public class Solution
         }
 
         return maxGap;
+    }
+
+    public static int Rob(int[] nums)
+    {
+        int rob = 0;
+        int notRob = 0;
+
+        foreach (var money in nums)
+        {
+            int current = Math.Max(rob, money + notRob);
+            notRob = rob;
+            rob = current;
+        }
+
+        return rob;
     }
 
     #endregion
