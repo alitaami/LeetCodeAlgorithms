@@ -121,6 +121,7 @@ public class Solution
         var res96 = Rob(new int[] { 2, 1, 1, 2 });
         var res97 = LongestWord(new string[] { "w", "wo", "wor", "worl", "world" });
         var res98 = NumJewelsInStones("aA", "aAAbbbb");
+        var res99 = BuddyStrings("ab", "ba");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3264,7 +3265,7 @@ public class Solution
     {
         int counter = 0;
         var jewelsArray = jewels.ToCharArray().ToHashSet();
-        foreach(char stone in stones)
+        foreach (char stone in stones)
         {
             if (jewelsArray.Contains(stone))
                 counter++;
@@ -3272,6 +3273,40 @@ public class Solution
 
         return counter;
     }
+
+    public static bool BuddyStrings(string s, string goal)
+    {
+        if (s.Length != goal.Length)
+            return false;
+
+        if (s.Equals(goal))
+        {
+            var set = new HashSet<char>();
+            foreach (char c in s)
+            {
+                // its true, if we can swap two same char it will be true
+                // example:  if we swap first 'a' with second 'a' in : 'aab' , 'aab'
+                // but in 'ab' , 'ab' if we swap 'a' & 'b' they are not the same anymore
+                if (set.Contains(c))
+                    return true;
+                else
+                    set.Add(c);
+            }
+            return false;
+        }
+
+        var diff = new List<int>();
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] != goal[i])
+                diff.Add(i);
+        }
+
+        return diff.Count() == 2 &&
+            s[diff[0]] == goal[diff[1]] &&
+            s[diff[1]] == goal[diff[0]];
+    }
+
     #endregion
 
     #region SQL
