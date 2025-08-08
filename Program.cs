@@ -119,6 +119,7 @@ public class Solution
         var res94 = RomanToInt("III");
         var res95 = MaximumGap(new int[] { 3, 6, 9, 1 });
         var res96 = Rob(new int[] { 2, 1, 1, 2 });
+        var res97 = LongestWord(new string[] { "w", "wo", "wor", "worl", "world" });
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3229,6 +3230,34 @@ public class Solution
         return rob;
     }
 
+    public static string LongestWord(string[] words)
+    {
+        var set = new HashSet<string>(words);
+        string longest = string.Empty;
+
+        foreach (var word in set)
+        {
+            bool isValid = true;
+
+            for (int i = 1; i < word.Length; i++)
+            {
+                if (!set.Contains(word.Substring(0, i)))
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+
+            if (isValid &&
+               (word.Length > longest.Length ||
+               (word.Length == longest.Length && string.CompareOrdinal(word, longest) < 0)))
+            {
+                longest = word;
+            }
+        }
+
+        return longest;
+    }
     #endregion
 
     #region SQL
