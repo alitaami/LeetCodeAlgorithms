@@ -120,6 +120,7 @@ public class Solution
         var res95 = MaximumGap(new int[] { 3, 6, 9, 1 });
         var res96 = Rob(new int[] { 2, 1, 1, 2 });
         var res97 = LongestWord(new string[] { "w", "wo", "wor", "worl", "world" });
+        var res98 = NumJewelsInStones("aA", "aAAbbbb");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -3257,6 +3258,19 @@ public class Solution
         }
 
         return longest;
+    }
+
+    public static int NumJewelsInStones(string jewels, string stones)
+    {
+        int counter = 0;
+        var jewelsArray = jewels.ToCharArray().ToHashSet();
+        foreach(char stone in stones)
+        {
+            if (jewelsArray.Contains(stone))
+                counter++;
+        }
+
+        return counter;
     }
     #endregion
 
