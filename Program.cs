@@ -122,6 +122,7 @@ public class Solution
         var res97 = LongestWord(new string[] { "w", "wo", "wor", "worl", "world" });
         var res98 = NumJewelsInStones("aA", "aAAbbbb");
         var res99 = BuddyStrings("ab", "ba");
+        var res100 = FrequencySort("aab");
 
         // SQL
         var sqlProblem = CombineTwoTable();
@@ -2742,7 +2743,7 @@ public class Solution
          .ExceptBy(banned, gr => gr.Key)
          .MaxBy(gr => gr.Count()).Key;
     }
-    
+
     public string MostCommonWord3(string paragraph, string[] banned)
     {
         var separators = new char[] { ' ', '!', '?', ',', ';', '.', '"', '\'' };
@@ -2761,7 +2762,7 @@ public class Solution
                     dic[word] = 1;
             }
         }
-        return dic.MaxBy(kvp => kvp.Value).Key; 
+        return dic.MaxBy(kvp => kvp.Value).Key;
     }
 
     public static bool CanConstruct(string ransomNote, string magazine)
@@ -3326,6 +3327,52 @@ public class Solution
         return diff.Count() == 2 &&
             s[diff[0]] == goal[diff[1]] &&
             s[diff[1]] == goal[diff[0]];
+    }
+
+    public static string FrequencySort(string s)
+    {
+        StringBuilder result = new StringBuilder();
+        var dic = new Dictionary<char, int>();
+
+        foreach (char c in s)
+        {
+            if (dic.ContainsKey(c))
+                dic[c]++;
+            else
+                dic[c] = 1;
+        }
+
+        var pairs = new List<KeyValuePair<char, int>>(dic);
+
+        pairs.Sort((a, b) => b.Value.CompareTo(a.Value));
+
+        foreach (var pair in pairs)
+        {
+            result.Append(pair.Key, pair.Value);
+        }
+
+        return result.ToString();
+    }
+
+    public static string FrequencySort2(string s)
+    {
+        StringBuilder result = new StringBuilder();
+        var dic = new Dictionary<char, int>();
+
+        foreach (char c in s)
+        {
+            if (dic.ContainsKey(c))
+                dic[c]++;
+            else
+                dic[c] = 1;
+        }
+
+        foreach (var item in dic.OrderByDescending(x => x.Value))
+        {
+            result.Append(item.Key, item.Value);
+        }
+
+        return result.ToString();
     }
 
     #endregion
