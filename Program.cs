@@ -2742,6 +2742,27 @@ public class Solution
          .ExceptBy(banned, gr => gr.Key)
          .MaxBy(gr => gr.Count()).Key;
     }
+    
+    public string MostCommonWord3(string paragraph, string[] banned)
+    {
+        var separators = new char[] { ' ', '!', '?', ',', ';', '.', '"', '\'' };
+        var bannedSet = new HashSet<string>(banned);
+        var words = paragraph.ToLower().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+        var dic = new Dictionary<string, int>();
+
+        foreach (var word in words)
+        {
+            if (!bannedSet.Contains(word))
+            {
+                if (dic.ContainsKey(word))
+                    dic[word]++;
+                else
+                    dic[word] = 1;
+            }
+        }
+        return dic.MaxBy(kvp => kvp.Value).Key; 
+    }
 
     public static bool CanConstruct(string ransomNote, string magazine)
     {
